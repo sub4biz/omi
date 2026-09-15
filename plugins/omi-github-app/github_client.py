@@ -1,6 +1,6 @@
 import os
 import requests
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Callable, Any
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -50,9 +50,9 @@ class GitHubClient:
                 if "access_token" in token_data:
                     return token_data
                 else:
-                    raise Exception(f"No access token in response: {token_data}")
+                    raise Exception("No access token in token exchange response")
             else:
-                raise Exception(f"Token exchange failed: {response.status_code} - {response.text}")
+                raise Exception(f"Token exchange failed: {response.status_code}")
                 
         except Exception as e:
             print(f"❌ Token exchange error: {e}")
@@ -78,76 +78,83 @@ class GitHubClient:
             print(f"❌ Error getting user info: {e}")
             raise
     
-    def list_user_repos(self, access_token: str, per_page: int = 100) -> List[Dict]:
+    def _get_paginated(
+        self,
+        access_token: str,
+        path: str,
+        params: Dict,
+        resource: str,
+        project: Callable[[Dict], Any],
+    ) -> List[Any]:
         """
-        List all repositories the user has access to (owned + collaborator).
-        Returns list of {name, full_name, owner, private, description}
+        Fetch every page of a GitHub list endpoint by following `next` links,
+        mapping each item through `project`. Returns [] on any page or item
+        failure — a truncated or malformed list misleads callers more than
+        an empty one.
         """
         try:
-            repos = []
+            items = []
             page = 1
-            headers = {
-                "Authorization": f"Bearer {access_token}",
-                "Accept": "application/vnd.github.v3+json"
-            }
 
             while True:
                 response = requests.get(
-                    f"{self.api_base}/user/repos",
-                    headers=headers,
-                    params={"per_page": per_page, "sort": "updated", "page": page}
+                    f"{self.api_base}{path}",
+                    headers={
+                        "Authorization": f"Bearer {access_token}",
+                        "Accept": "application/vnd.github.v3+json"
+                    },
+                    params={**params, "page": page}
                 )
 
                 if response.status_code != 200:
-                    print(f"⚠️  Could not fetch repositories: {response.status_code}")
+                    print(f"⚠️  Could not fetch {resource}: {response.status_code}")
                     return []
 
-                for repo in response.json():
-                    repos.append({
-                        "name": repo["name"],
-                        "full_name": repo["full_name"],
-                        "owner": repo["owner"]["login"],
-                        "private": repo["private"],
-                        "description": repo.get("description", ""),
-                        "url": repo["html_url"]
-                    })
+                items.extend(project(item) for item in response.json())
 
                 if "next" not in response.links:
                     break
 
                 page += 1
 
-            return repos
-            
+            return items
+
         except Exception as e:
-            print(f"❌ Error listing repos: {e}")
+            print(f"⚠️  Error fetching {resource}: {e}")
             return []
-    
+
+    def list_user_repos(self, access_token: str, per_page: int = 100) -> List[Dict]:
+        """
+        List all repositories the user has access to (owned + collaborator).
+        Returns list of {name, full_name, owner, private, description}
+        """
+        return self._get_paginated(
+            access_token,
+            "/user/repos",
+            {"per_page": per_page, "sort": "updated"},
+            "repositories",
+            lambda repo: {
+                "name": repo["name"],
+                "full_name": repo["full_name"],
+                "owner": repo["owner"]["login"],
+                "private": repo["private"],
+                "description": repo.get("description", ""),
+                "url": repo["html_url"]
+            },
+        )
+
     def get_repo_labels(self, access_token: str, repo_full_name: str) -> List[str]:
         """
         Fetch all labels from a repository.
         Returns list of label names.
         """
-        try:
-            response = requests.get(
-                f"{self.api_base}/repos/{repo_full_name}/labels",
-                headers={
-                    "Authorization": f"Bearer {access_token}",
-                    "Accept": "application/vnd.github.v3+json"
-                },
-                params={"per_page": 100}
-            )
-            
-            if response.status_code == 200:
-                labels = response.json()
-                return [label["name"] for label in labels]
-            else:
-                print(f"⚠️  Could not fetch labels: {response.status_code}")
-                return []
-                
-        except Exception as e:
-            print(f"⚠️  Error fetching labels: {e}")
-            return []
+        return self._get_paginated(
+            access_token,
+            f"/repos/{repo_full_name}/labels",
+            {"per_page": 100},
+            "labels",
+            lambda label: label["name"],
+        )
     
     async def create_issue(
         self,
@@ -189,7 +196,7 @@ class GitHubClient:
                     "title": issue["title"]
                 }
             else:
-                error_msg = response.json().get("message", response.text)
+                error_msg = response.json().get("message", f"HTTP {response.status_code}")
                 print(f"❌ GitHub API error: {response.status_code} - {error_msg}")
                 return {
                     "success": False,
@@ -205,36 +212,69 @@ class GitHubClient:
                 "error": str(e)
             }
 
+    @staticmethod
+    def _error_message(response) -> str:
+        """Extract GitHub's error message from a non-2xx response."""
+        try:
+            message = response.json().get("message")
+        except Exception:
+            message = None
+        return message or getattr(response, "text", "") or "Unknown error"
+
     def list_issues(
         self,
         access_token: str,
         repo_full_name: str,
         state: str = "open",
-        per_page: int = 10
-    ) -> List[Dict]:
+        per_page: int = 10,
+        max_pages: int = 5
+    ) -> Dict:
         """
         List issues in a repository.
-        Returns list of issue dicts.
-        """
-        try:
-            response = requests.get(
-                f"{self.api_base}/repos/{repo_full_name}/issues",
-                headers={
-                    "Authorization": f"Bearer {access_token}",
-                    "Accept": "application/vnd.github.v3+json"
-                },
-                params={
-                    "state": state,
-                    "per_page": per_page,
-                    "sort": "created",
-                    "direction": "desc"
-                }
-            )
+        Returns {"issues": [...]} on success, or
+        {"error": str, "status": int|None} on failure so callers can
+        distinguish an empty repository from an API error.
 
-            if response.status_code == 200:
-                issues = response.json()
-                return [
-                    {
+        GitHub's issues endpoint also returns pull requests. Pages are
+        fetched with headroom and pull requests are filtered locally until
+        `per_page` issues are collected (bounded by `max_pages`), so pull
+        requests cannot starve the requested limit.
+        """
+        issues = []
+        page = 1
+        # Fetch extra headroom per page: pull requests share this endpoint
+        # and are filtered out below.
+        page_size = min(max(per_page, 1) * 2, 100)
+
+        try:
+            while len(issues) < per_page and page <= max_pages:
+                response = requests.get(
+                    f"{self.api_base}/repos/{repo_full_name}/issues",
+                    headers={
+                        "Authorization": f"Bearer {access_token}",
+                        "Accept": "application/vnd.github.v3+json"
+                    },
+                    params={
+                        "state": state,
+                        "per_page": page_size,
+                        "sort": "created",
+                        "direction": "desc",
+                        "page": page
+                    }
+                )
+
+                if response.status_code != 200:
+                    error_msg = self._error_message(response)
+                    print(f"❌ Error listing issues: {response.status_code} - {error_msg}")
+                    return {
+                        "error": f"GitHub API error ({response.status_code}): {error_msg}",
+                        "status": response.status_code
+                    }
+
+                for issue in response.json():
+                    if "pull_request" in issue:  # Filter out PRs
+                        continue
+                    issues.append({
                         "number": issue["number"],
                         "title": issue["title"],
                         "state": issue["state"],
@@ -243,27 +283,32 @@ class GitHubClient:
                         "url": issue["html_url"],
                         "created_at": issue["created_at"],
                         "user": issue["user"]["login"] if issue.get("user") else None
-                    }
-                    for issue in issues
-                    if "pull_request" not in issue  # Filter out PRs
-                ]
-            else:
-                print(f"❌ Error listing issues: {response.status_code}")
-                return []
+                    })
+                    if len(issues) >= per_page:
+                        break
+
+                if "next" not in response.links:
+                    break
+
+                page += 1
+
+            return {"issues": issues}
 
         except Exception as e:
             print(f"❌ Error listing issues: {e}")
-            return []
+            return {"error": f"Failed to list issues: {e}", "status": None}
 
     def get_issue(
         self,
         access_token: str,
         repo_full_name: str,
         issue_number: int
-    ) -> Optional[Dict]:
+    ) -> Dict:
         """
         Get details of a specific issue.
-        Returns issue dict if successful.
+        Returns {"issue": {...}} on success, or
+        {"error": str, "status": int|None} on failure (including 404) so
+        callers can distinguish "not found" from auth/rate-limit errors.
         """
         try:
             response = requests.get(
@@ -277,27 +322,31 @@ class GitHubClient:
             if response.status_code == 200:
                 issue = response.json()
                 return {
-                    "number": issue["number"],
-                    "title": issue["title"],
-                    "state": issue["state"],
-                    "body": issue.get("body", ""),
-                    "labels": [label["name"] for label in issue.get("labels", [])],
-                    "url": issue["html_url"],
-                    "created_at": issue["created_at"],
-                    "updated_at": issue["updated_at"],
-                    "user": issue["user"]["login"] if issue.get("user") else None,
-                    "assignees": [a["login"] for a in issue.get("assignees", [])],
-                    "comments": issue.get("comments", 0)
+                    "issue": {
+                        "number": issue["number"],
+                        "title": issue["title"],
+                        "state": issue["state"],
+                        "body": issue.get("body", ""),
+                        "labels": [label["name"] for label in issue.get("labels", [])],
+                        "url": issue["html_url"],
+                        "created_at": issue["created_at"],
+                        "updated_at": issue["updated_at"],
+                        "user": issue["user"]["login"] if issue.get("user") else None,
+                        "assignees": [a["login"] for a in issue.get("assignees", [])],
+                        "comments": issue.get("comments", 0)
+                    }
                 }
-            elif response.status_code == 404:
-                return None
             else:
-                print(f"❌ Error getting issue: {response.status_code}")
-                return None
+                error_msg = self._error_message(response)
+                print(f"❌ Error getting issue: {response.status_code} - {error_msg}")
+                return {
+                    "error": f"GitHub API error ({response.status_code}): {error_msg}",
+                    "status": response.status_code
+                }
 
         except Exception as e:
             print(f"❌ Error getting issue: {e}")
-            return None
+            return {"error": f"Failed to get issue: {e}", "status": None}
 
     def add_issue_comment(
         self,
@@ -328,7 +377,7 @@ class GitHubClient:
                     "comment_url": comment["html_url"]
                 }
             else:
-                error_msg = response.json().get("message", response.text)
+                error_msg = response.json().get("message", f"HTTP {response.status_code}")
                 print(f"❌ GitHub API error: {response.status_code} - {error_msg}")
                 return {
                     "success": False,
@@ -351,33 +400,17 @@ class GitHubClient:
         Fetch all labels from a repository with full details.
         Returns list of label dicts with name, color, description.
         """
-        try:
-            response = requests.get(
-                f"{self.api_base}/repos/{repo_full_name}/labels",
-                headers={
-                    "Authorization": f"Bearer {access_token}",
-                    "Accept": "application/vnd.github.v3+json"
-                },
-                params={"per_page": 100}
-            )
-
-            if response.status_code == 200:
-                labels = response.json()
-                return [
-                    {
-                        "name": label["name"],
-                        "color": label["color"],
-                        "description": label.get("description", "")
-                    }
-                    for label in labels
-                ]
-            else:
-                print(f"⚠️  Could not fetch labels: {response.status_code}")
-                return []
-
-        except Exception as e:
-            print(f"⚠️  Error fetching labels: {e}")
-            return []
+        return self._get_paginated(
+            access_token,
+            f"/repos/{repo_full_name}/labels",
+            {"per_page": 100},
+            "labels",
+            lambda label: {
+                "name": label["name"],
+                "color": label["color"],
+                "description": label.get("description", "")
+            },
+        )
 
     def get_repo_permissions(self, access_token: str, repo_full_name: str) -> Optional[Dict]:
         """
@@ -401,7 +434,7 @@ class GitHubClient:
                 try:
                     error_msg = response.json().get("message")
                 except Exception:
-                    error_msg = response.text
+                    error_msg = f"HTTP {response.status_code}"
                 print(f"⚠️  Could not fetch repo permissions: {response.status_code} - {error_msg}")
                 return {
                     "_error": error_msg or "Unknown error",

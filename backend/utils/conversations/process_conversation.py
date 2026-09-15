@@ -40,7 +40,7 @@ from database.apps import record_app_usage, get_omi_personas_by_uid_db, get_app_
 from database.vector_db import upsert_vector2, update_vector_metadata, upsert_transcript_chunk_vectors
 from utils.conversations.transcript_chunks import build_transcript_chunks
 from models.app import App, UsageHistoryType
-from models.memories import MemoryDB, Memory, MemoryCategory, SubjectAttribution
+from models.memories import MemoryCaptureContext, MemoryDB, Memory, MemoryCategory, SubjectAttribution
 from models.action_item import EvidenceKind, EvidenceRef, EvidenceScope
 from models.memory_contracts import L1MemoryArchiveClass, deterministic_contract_id
 from models.workstream_association import AssociationEvidence
@@ -65,6 +65,14 @@ from models.conversation_enums import (
     ExternalIntegrationConversationSource,
 )
 from utils.conversations.deterministic_minimum import build_deterministic_minimum_structured
+from utils.conversations.duplicate_capture import (
+    CANDIDATE_PAGE_LIMIT,
+    DuplicateCaptureMatch,
+    MIN_CANDIDATE_WORDS,
+    capture_record,
+    find_duplicate_capture,
+    mark_duplicate_capture,
+)
 from utils.conversations.duration import conversation_duration_seconds
 from utils.conversations.factory import deserialize_conversation
 from utils.conversations.projection_payload import (
@@ -373,6 +381,48 @@ def _proposes_task_candidates(conversation: Any) -> bool:
     return getattr(conversation, 'source', None) == ConversationSource.desktop
 
 
+def _detect_duplicate_capture(
+    uid: str, conversation: Union[Conversation, CreateConversation]
+) -> Optional[DuplicateCaptureMatch]:
+    """Another capture client's conversation that already carries this one (#3244).
+
+    Fails open: a candidate-read failure keeps this conversation on the ordinary
+    path, the pre-fix outcome of two visible conversations, never a lost one.
+    """
+    candidate = capture_record(conversation)
+    if candidate is None or len(candidate.words) < MIN_CANDIDATE_WORDS:
+        return None
+    try:
+        rows = [
+            row
+            for status in (ConversationStatus.completed.value, ConversationStatus.processing.value)
+            for row in conversations_db.get_conversations_finished_after(
+                uid, status=status, finished_after=candidate.started_at, limit=CANDIDATE_PAGE_LIMIT
+            )
+        ]
+    except Exception:
+        record_fallback(
+            component='conversation_finalization',
+            from_mode='duplicate_capture_check',
+            to_mode='keep_both_captures',
+            reason='other',
+            outcome='degraded',
+            log=logger,
+        )
+        return None
+    match = find_duplicate_capture(candidate, [record for record in map(capture_record, rows) if record is not None])
+    if match is not None:
+        logger.info(
+            'duplicate capture folded uid=%s conversation=%s primary=%s coverage=%.2f containment=%.2f',
+            uid,
+            getattr(conversation, 'id', None),
+            match.primary_conversation_id,
+            match.window_coverage,
+            match.transcript_containment,
+        )
+    return match
+
+
 def _get_structured(
     uid: str,
     language_code: str,
@@ -536,6 +586,17 @@ def _get_structured(
                     primary_user_name=_primary_user_name(uid),
                 )
             return structured, False
+
+        # A second capture client already carrying this speech (#3244: Omi device
+        # on the phone + macOS microphone in the same room) is folded away here,
+        # before any LLM spend. It takes the same discard exit as a scrap, so the
+        # transcript and audio stay on the row and the primary is recorded in
+        # external_data. Deliberately ahead of the calendar override: the primary
+        # already holds that meeting.
+        duplicate_capture = _detect_duplicate_capture(uid, main_conv)
+        if duplicate_capture is not None:
+            mark_duplicate_capture(main_conv, duplicate_capture)
+            return Structured(emoji=random.choice(['🧠', '🎉'])), True
 
         # Transcript span, not the wall window: `started_at` is the streaming-session
         # origin, so `finished_at - started_at` read an 8s scrap as 42 minutes (#4056).
@@ -1273,6 +1334,32 @@ def _grounded_l1_evidence_quotes(evidence_quotes: List[str], segments: List[Any]
     return grounded
 
 
+def _l1_owner_spoken_for_grounded_quotes(evidence_quotes: List[str], segments: List[Any]) -> bool:
+    """Return true only when every grounded quote is spoken by the owner.
+
+    Subject resolution may conservatively fall back to ``about=user`` when a
+    transcript has a uniquely identified owner but no quote-bound speaker. That
+    is enough to scope a claim, but it is not evidence that the owner uttered
+    the source text. Source attribution therefore requires quote-level binding
+    to the owner's cluster.
+    """
+
+    owner_evidence = OwnerAttributionEvidence.from_segments(segments)
+    if not evidence_quotes or not may_attribute_to_owner(owner_evidence):
+        return False
+    for raw_quote in evidence_quotes:
+        normalized_quote = _normalized_l1_evidence_quote(raw_quote)
+        matched_segments = [
+            segment
+            for segment in segments
+            if normalized_quote
+            and f" {normalized_quote} " in f" {_normalized_l1_evidence_quote(str(getattr(segment, 'text', '') or ''))} "
+        ]
+        if len(matched_segments) != 1 or not may_attribute_to_owner(owner_evidence, segment=matched_segments[0]):
+            return False
+    return True
+
+
 def _canonical_quote_ref(
     *,
     quote: str,
@@ -1387,6 +1474,7 @@ def _extract_memories_canonical(
     memory_service = MemoryService(db_client=db_client)
 
     language = users_db.get_user_language_preference(uid)
+    source_captured_at = getattr(conversation, "started_at", None) or getattr(conversation, "created_at", None)
     capture_candidates: List[Tuple[Memory, List[str], str, List[str], bool]] = []
     capture_decisions_by_memory_object: Dict[int, Tuple[str, bool]] = {}
 
@@ -1490,6 +1578,32 @@ def _extract_memories_canonical(
                 visibility="private",
                 subject_entity_id=subject_entity_id,
                 subject_attribution=subject_attribution,
+            )
+            # Carry the candidate's proposition shape onto the persisted
+            # memory: object qualifiers and decision states must not be
+            # silently dropped by canonical conversation capture. Arguments
+            # are already scoped/bounded by the extractor.
+            memory.predicate = getattr(candidate, "predicate", None)
+            memory.arguments = dict(getattr(candidate, "arguments", None) or {})
+            # The transcript is the original evidence family for this
+            # candidate. Build capture context from the server-owned
+            # conversation and the resolved speaker attribution; never trust
+            # source identifiers emitted by the model. The canonical adapter
+            # preserves this context on MemoryEvidence.
+            source_attribution = (
+                "user_spoken"
+                if _l1_owner_spoken_for_grounded_quotes(evidence_quotes, conversation.transcript_segments)
+                else "third_party" if subject_attribution == SubjectAttribution.third_party else "unknown"
+            )
+            memory.capture_context = MemoryCaptureContext(
+                source_type="conversation",
+                captured_at=source_captured_at,
+                source_id=conversation.id,
+                source_version="v1",
+                source_signal="transcription",
+                independence_group=conversation.id,
+                lineage_id=conversation.id,
+                attribution=source_attribution,
             )
             if belief_model_enabled():
                 resolved_scope = subject_scope_from_extraction(
@@ -1601,6 +1715,7 @@ def _extract_memories_canonical(
             artifact_ref=_transcript_artifact_ref(conversation),
             extractor_id="canonical_l1_memory_extractor" if has_candidate_subject else "new_memories_extractor",
             extractor_version="v1",
+            source_captured_at=source_captured_at,
             subject_entity_id=candidate_subject_entity_id,
             subject_attribution=memory.subject_attribution if has_candidate_subject else subject_attribution,
             client_device_id=getattr(conversation, "client_device_id", None),
