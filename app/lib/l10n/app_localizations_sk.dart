@@ -937,9 +937,6 @@ class AppLocalizationsSk extends AppLocalizations {
   String get claudeDesktop => 'Claude Desktop';
 
   @override
-  String get addToClaudeConfig => 'Pridať do claude_desktop_config.json';
-
-  @override
   String get copyConfig => 'Skopírovať konfiguráciu';
 
   @override
@@ -2482,13 +2479,7 @@ class AppLocalizationsSk extends AppLocalizations {
   String get clearAllNodesAndConnections => 'Vymazať všetky uzly a spojenia';
 
   @override
-  String get addToClaudeDesktopConfig => 'Pridať do claude_desktop_config.json';
-
-  @override
   String get connectAiAssistantsToData => 'Pripojte AI asistentov k vašim údajom';
-
-  @override
-  String get useYourMcpApiKey => 'Použite svoj MCP API kľúč';
 
   @override
   String get realTimeTranscript => 'Prepis v reálnom čase';
@@ -2501,12 +2492,6 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get detailedDiagnosticMessages => 'Podrobné diagnostické správy';
-
-  @override
-  String get autoCreateSpeakers => 'Automaticky vytvoriť rečníkov';
-
-  @override
-  String get autoCreateWhenNameDetected => 'Automaticky vytvoriť pri zistení mena';
 
   @override
   String get followUpQuestions => 'Následné otázky';
@@ -11151,11 +11136,25 @@ class AppLocalizationsSk extends AppLocalizations {
       'Keď niekoho pomenujete, Omi si uchová krátku ukážku hlasu, aby ho nabudúce spoznal';
 
   @override
-  String get transcriptionUnavailableRecordingContinues =>
-      'Transkripcie sú nedostupné, nahrávanie pokračuje v zariadení a neskôr sa spracuje';
+  String get leaveBlank => 'Nechajte prázdne';
 
   @override
-  String get transcriptionUnavailableSavingOnDevice => 'Transkripcia nedostupná · ukladá sa v zariadení';
+  String get mcpOAuthSetup =>
+      'Na claude.ai pridajte vlastný konektor a vložte URL servera. Ak Claude požiada o pokročilé OAuth Client ID, použite hodnotu nižšie a nechajte tajný kľúč prázdny — nikdy nepoužívajte svoj MCP API kľúč ako OAuth secret.';
+
+  @override
+  String get claudeCode => 'Claude Code';
+
+  @override
+  String get addToClaudeCodeConfig => 'Pridať do ~/.claude.json';
+
+  @override
+  String get claudeDesktopConnectorSetup =>
+      'Na Claude Desktop → Settings → Connectors pridajte vlastný konektor a vložte URL servera. Ak Claude požiada o pokročilé OAuth Client ID, použite hodnotu nižšie a nechajte tajný kľúč prázdny — nikdy nepoužívajte svoj MCP API kľúč ako OAuth secret.';
+
+  @override
+  String get transcriptionUnavailableRecordingContinues =>
+      'Transkripcie sú nedostupné, nahrávanie pokračuje v zariadení a neskôr sa spracuje';
 
   @override
   String transcriptionsPendingFraction(int pending, int total) {
@@ -11213,4 +11212,131 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get openCall => 'Otvoriť hovor';
+
+  @override
+  String get captureRecoveryBanner => 'Zvuk prívesku sa do aplikácie nedostáva — opravte klepnutím';
+
+  @override
+  String get phoneRecordingBlockedByPendantBatch => 'Pred nahrávaním telefónom zastavte Transcribe Later na prívesku.';
+
+  @override
+  String get captureNotTranscribing => 'Neprepisuje sa';
+
+  @override
+  String get captureAudioSavedTranscribesLater => 'Zvuk uložený, prepíše sa neskôr';
+
+  @override
+  String get captureStillRecording => 'Stále sa nahráva';
+
+  @override
+  String get captureMicInUseElsewhere => 'Mikrofón používa iná aplikácia';
+
+  @override
+  String get captureMicInterruptedDetail =>
+      'Hovor alebo iná aplikácia prevzala mikrofón, takže Omi teraz nepočuje. Omi bude pokračovať sám, keď sa mikrofón uvoľní. Všetko nahraté predtým je v bezpečí.';
+
+  @override
+  String get captureCustomSttUnreachableDetail =>
+      'Vaša vlastná služba prevodu reči na text nie je dostupná. Omi uchováva zvuk v tomto telefóne a odošle ho, keď bude služba opäť k dispozícii. Nič sa nestratí.';
+
+  @override
+  String get captureStarting => 'Spúšťa sa…';
+
+  @override
+  String get capturePhoneStorageFull => 'Úložisko telefónu je plné';
+
+  @override
+  String get captureStorageAlmostFull => 'Úložisko je takmer plné';
+
+  @override
+  String get capturePendantDisconnectedDetail =>
+      'Prívesok stratil spojenie s týmto telefónom. Omi sa znova pripojí sám, keď bude prívesok zapnutý a nablízku. Všetko nahraté predtým je v bezpečí.';
+
+  @override
+  String participantsSummaryUncounted(String name) {
+    return '$name a ďalší';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyTitle => 'Vypočujte si odpovede Omi';
+
+  @override
+  String get deviceOnboardingVoiceReplySample => 'Rozumiem. Vaše ďalšie stretnutie sa začne o dvadsať minút.';
+
+  @override
+  String get deviceOnboardingAllSetTitle => 'Všetko je pripravené';
+
+  @override
+  String get deviceOnboardingAllSetSubtitle => 'Ťuknutím na riadok ho skontrolujete alebo zmeníte.';
+
+  @override
+  String get deviceOnboardingAllSetSinglePressBadge => '1×';
+
+  @override
+  String get deviceOnboardingAllSetDoublePressBadge => '2×';
+
+  @override
+  String get deviceOnboardingVoiceReplySubtitle =>
+      'Keď sa spýtate tlačidlom, číslo Omi dokáže prečítať svoju odpoveď nahlas.';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewIdle => 'Vypočujte si svoju poslednú odpoveď';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewPlaying => 'Prehráva sa vaša posledná odpoveď...';
+
+  @override
+  String deviceOnboardingVoiceReplyPreviewThroughDevice(String device) {
+    return 'Prostredníctvom $device';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker => 'Cez reproduktor telefónu';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughCurrentOutput => 'Prostredníctvom aktuálneho zvukového výstupu';
+
+  @override
+  String get deviceOnboardingVoiceReplyOffDescription => 'Odpovede zostávajú na obrazovke. Nič sa nehovorí.';
+
+  @override
+  String get deviceOnboardingVoiceReplyHeadphonesDescription =>
+      'Súkromné. Hovorí iba cez AirPods, Bluetooth alebo káblové slúchadlá.';
+
+  @override
+  String get deviceOnboardingVoiceReplyAlwaysDescription =>
+      'Používa reproduktor telefónu, keď nie sú pripojené žiadne slúchadlá.';
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusOff => 'Omi zostane ticho. Odpovede sa stále zobrazujú v aplikácii.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusHeadphonesConnected(String device) {
+    return '$device pripojené. Tu bude hovoriť Omi.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusHeadphonesDisconnected =>
+      'Nie sú pripojené žiadne slúchadlá. Omi zostane ticho, kým nejaké nepripojíte.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusAlwaysHeadphones(String device) {
+    return 'Prehráva cez číslo $device.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusAlwaysSpeaker => 'Prehráva sa nahlas cez reproduktor telefónu.';
+
+  @override
+  String deviceOnboardingVoiceReplySettingsHint(String settings, String voiceResponse) {
+    return 'Toto môžete kedykoľvek zmeniť na čísle $settings › $voiceResponse';
+  }
+
+  @override
+  String deviceOnboardingAllSetReplayHint(String settings, String deviceSettings, String deviceTutorial) {
+    return 'Prehrajte si túto prehliadku kedykoľvek na čísle $settings › $deviceSettings › $deviceTutorial';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyGenericHeadphones => 'Slúchadlá';
 }

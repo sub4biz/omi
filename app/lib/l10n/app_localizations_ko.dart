@@ -922,9 +922,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get claudeDesktop => 'Claude Desktop';
 
   @override
-  String get addToClaudeConfig => 'claude_desktop_config.json에 추가';
-
-  @override
   String get copyConfig => '구성 복사';
 
   @override
@@ -2436,13 +2433,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get clearAllNodesAndConnections => '모든 노드와 연결 지우기';
 
   @override
-  String get addToClaudeDesktopConfig => 'claude_desktop_config.json에 추가';
-
-  @override
   String get connectAiAssistantsToData => 'AI 어시스턴트를 데이터에 연결';
-
-  @override
-  String get useYourMcpApiKey => 'MCP API 키 사용';
 
   @override
   String get realTimeTranscript => '실시간 대화 내용';
@@ -2455,12 +2446,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get detailedDiagnosticMessages => '자세한 진단 메시지';
-
-  @override
-  String get autoCreateSpeakers => '발화자 자동 생성';
-
-  @override
-  String get autoCreateWhenNameDetected => '이름 감지 시 자동 생성';
 
   @override
   String get followUpQuestions => '후속 질문';
@@ -10980,10 +10965,24 @@ class AppLocalizationsKo extends AppLocalizations {
   String get voiceSettingsSaveOthersSubtitle => '누군가에게 이름을 붙이면, 다음에 알아볼 수 있도록 Omi가 짧은 음성 샘플을 보관해요';
 
   @override
-  String get transcriptionUnavailableRecordingContinues => '전사를 이용할 수 없습니다. 기기에서 녹음이 계속되며 나중에 처리됩니다';
+  String get leaveBlank => '비워 두세요';
 
   @override
-  String get transcriptionUnavailableSavingOnDevice => '전사 불가 · 기기에 저장 중';
+  String get mcpOAuthSetup =>
+      'claude.ai에서 사용자 지정 커넥터를 추가하고 서버 URL을 붙여넣으세요. Claude가 고급 OAuth Client ID를 요청하면 아래 값을 사용하고 시크릿은 비워 두세요. MCP API 키를 OAuth 시크릿으로 절대 사용하지 마세요.';
+
+  @override
+  String get claudeCode => 'Claude Code';
+
+  @override
+  String get addToClaudeCodeConfig => '~/.claude.json에 추가';
+
+  @override
+  String get claudeDesktopConnectorSetup =>
+      'Claude Desktop → Settings → Connectors에서 사용자 지정 커넥터를 추가하고 서버 URL을 붙여넣으세요. Claude가 고급 OAuth Client ID를 요청하면 아래 값을 사용하고 시크릿은 비워 두세요. MCP API 키를 OAuth 시크릿으로 절대 사용하지 마세요.';
+
+  @override
+  String get transcriptionUnavailableRecordingContinues => '전사를 이용할 수 없습니다. 기기에서 녹음이 계속되며 나중에 처리됩니다';
 
   @override
   String transcriptionsPendingFraction(int pending, int total) {
@@ -11041,4 +11040,127 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get openCall => '통화 열기';
+
+  @override
+  String get captureRecoveryBanner => '펜던트 오디오가 앱에 도달하지 않습니다 — 탭하여 복구';
+
+  @override
+  String get phoneRecordingBlockedByPendantBatch => '휴대폰으로 녹음하기 전에 펜던트에서 Transcribe Later를 중지하세요.';
+
+  @override
+  String get captureNotTranscribing => '받아쓰기 중단됨';
+
+  @override
+  String get captureAudioSavedTranscribesLater => '오디오 저장됨, 나중에 받아쓰기';
+
+  @override
+  String get captureStillRecording => '녹음 계속 중';
+
+  @override
+  String get captureMicInUseElsewhere => '다른 앱이 마이크 사용 중';
+
+  @override
+  String get captureMicInterruptedDetail =>
+      '통화나 다른 앱이 마이크를 사용 중이라 지금은 Omi가 들을 수 없어요. 마이크가 비면 Omi가 자동으로 다시 시작해요. 그 전에 녹음된 내용은 안전하게 보관돼요.';
+
+  @override
+  String get captureCustomSttUnreachableDetail =>
+      '사용자 지정 음성-텍스트 서비스에 연결할 수 없어요. Omi가 오디오를 이 휴대폰에 보관했다가 서비스가 복구되면 보내요. 잃어버리는 건 없어요.';
+
+  @override
+  String get captureStarting => '시작하는 중…';
+
+  @override
+  String get capturePhoneStorageFull => '휴대폰 저장 공간 부족';
+
+  @override
+  String get captureStorageAlmostFull => '저장 공간 거의 참';
+
+  @override
+  String get capturePendantDisconnectedDetail =>
+      '펜던트와 이 휴대폰의 연결이 끊겼어요. 펜던트가 켜져 있고 가까이 있으면 Omi가 자동으로 다시 연결해요. 그 전에 녹음된 내용은 안전하게 보관돼요.';
+
+  @override
+  String participantsSummaryUncounted(String name) {
+    return '$name 외 여러 명';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyTitle => 'Omi의 답변 듣기';
+
+  @override
+  String get deviceOnboardingVoiceReplySample => '알겠습니다. 다음 회의가 20분 후에 시작됩니다.';
+
+  @override
+  String get deviceOnboardingAllSetTitle => '모두 준비됐어요';
+
+  @override
+  String get deviceOnboardingAllSetSubtitle => '검토하거나 변경하려면 행을 탭하세요.';
+
+  @override
+  String get deviceOnboardingAllSetSinglePressBadge => '1×';
+
+  @override
+  String get deviceOnboardingAllSetDoublePressBadge => '2×';
+
+  @override
+  String get deviceOnboardingVoiceReplySubtitle => '버튼으로 질문하면 Omi가 답변을 소리내어 읽어줄 수 있습니다.';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewIdle => '마지막 답변을 들어보세요';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewPlaying => '마지막 답변을 재생 중입니다...';
+
+  @override
+  String deviceOnboardingVoiceReplyPreviewThroughDevice(String device) {
+    return '$device을 통해';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker => '전화 스피커를 통해';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughCurrentOutput => '현재 오디오 출력을 통해';
+
+  @override
+  String get deviceOnboardingVoiceReplyOffDescription => '답변은 화면에 그대로 유지됩니다. 아무 말도하지 않습니다.';
+
+  @override
+  String get deviceOnboardingVoiceReplyHeadphonesDescription => '비공개. AirPods, Bluetooth 또는 유선 헤드폰을 통해서만 말합니다.';
+
+  @override
+  String get deviceOnboardingVoiceReplyAlwaysDescription => '헤드폰이 연결되어 있지 않을 때 휴대폰 스피커를 사용합니다.';
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusOff => 'Omi는 침묵할 것입니다. 답변은 여전히 ​​앱에 표시됩니다.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusHeadphonesConnected(String device) {
+    return '$device 연결되었습니다. Omi가 여기서 말할 것입니다.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusHeadphonesDisconnected => '연결된 헤드폰이 없습니다. Omi는 연결될 때까지 침묵을 유지합니다.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusAlwaysHeadphones(String device) {
+    return '$device을 통해 재생됩니다.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusAlwaysSpeaker => '전화 스피커를 통해 큰 소리로 재생됩니다.';
+
+  @override
+  String deviceOnboardingVoiceReplySettingsHint(String settings, String voiceResponse) {
+    return '$settings › $voiceResponse에서 언제든지 변경할 수 있습니다.';
+  }
+
+  @override
+  String deviceOnboardingAllSetReplayHint(String settings, String deviceSettings, String deviceTutorial) {
+    return '$settings › $deviceSettings › $deviceTutorial에서 언제든지 이 둘러보기를 다시 재생하세요.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyGenericHeadphones => '헤드폰';
 }

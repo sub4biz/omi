@@ -939,9 +939,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get claudeDesktop => 'Claude Desktop';
 
   @override
-  String get addToClaudeConfig => 'Ajouter à claude_desktop_config.json';
-
-  @override
   String get copyConfig => 'Copier la configuration';
 
   @override
@@ -2498,13 +2495,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get clearAllNodesAndConnections => 'Effacer tous les nœuds et connexions';
 
   @override
-  String get addToClaudeDesktopConfig => 'Ajouter à claude_desktop_config.json';
-
-  @override
   String get connectAiAssistantsToData => 'Connectez des assistants IA à vos données';
-
-  @override
-  String get useYourMcpApiKey => 'Utilisez votre clé API MCP';
 
   @override
   String get realTimeTranscript => 'Transcription en temps réel';
@@ -2517,12 +2508,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get detailedDiagnosticMessages => 'Messages de diagnostic détaillés';
-
-  @override
-  String get autoCreateSpeakers => 'Créer automatiquement les locuteurs';
-
-  @override
-  String get autoCreateWhenNameDetected => 'Créer automatiquement quand un nom est détecté';
 
   @override
   String get followUpQuestions => 'Questions de suivi';
@@ -11256,11 +11241,25 @@ class AppLocalizationsFr extends AppLocalizations {
       'Lorsque vous nommez une personne, Omi conserve un court échantillon de sa voix pour la reconnaître la prochaine fois';
 
   @override
-  String get transcriptionUnavailableRecordingContinues =>
-      'Les transcriptions sont indisponibles, l\'enregistrement continue sur l\'appareil et sera traité plus tard';
+  String get leaveBlank => 'Laisser vide';
 
   @override
-  String get transcriptionUnavailableSavingOnDevice => 'Transcription indisponible · enregistrement sur l\'appareil';
+  String get mcpOAuthSetup =>
+      'Sur claude.ai, ajoutez un connecteur personnalisé et collez l\'URL du serveur. Si Claude demande un Client ID OAuth avancé, utilisez la valeur ci-dessous et laissez le secret vide — n\'utilisez jamais votre clé API MCP comme secret OAuth.';
+
+  @override
+  String get claudeCode => 'Claude Code';
+
+  @override
+  String get addToClaudeCodeConfig => 'Ajouter à ~/.claude.json';
+
+  @override
+  String get claudeDesktopConnectorSetup =>
+      'Sur Claude Desktop → Settings → Connectors, ajoutez un connecteur personnalisé et collez l\'URL du serveur. Si Claude demande un Client ID OAuth avancé, utilisez la valeur ci-dessous et laissez le secret vide — n\'utilisez jamais votre clé API MCP comme secret OAuth.';
+
+  @override
+  String get transcriptionUnavailableRecordingContinues =>
+      'Les transcriptions sont indisponibles, l\'enregistrement continue sur l\'appareil et sera traité plus tard';
 
   @override
   String transcriptionsPendingFraction(int pending, int total) {
@@ -11318,4 +11317,133 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get openCall => 'Ouvrir l\'appel';
+
+  @override
+  String get captureRecoveryBanner => 'Le son du pendentif n\'arrive pas à l\'application — touchez pour réparer';
+
+  @override
+  String get phoneRecordingBlockedByPendantBatch =>
+      'Arrêtez Transcribe Later sur votre pendentif avant d\'enregistrer avec votre téléphone.';
+
+  @override
+  String get captureNotTranscribing => 'Pas de transcription';
+
+  @override
+  String get captureAudioSavedTranscribesLater => 'Audio enregistré, transcrit plus tard';
+
+  @override
+  String get captureStillRecording => 'Enregistrement en cours';
+
+  @override
+  String get captureMicInUseElsewhere => 'Micro utilisé par une autre app';
+
+  @override
+  String get captureMicInterruptedDetail =>
+      'Un appel ou une autre app utilise le micro, Omi ne peut donc pas écouter pour le moment. Omi reprendra tout seul dès que le micro sera libre. Tout ce qui a été enregistré avant est en sécurité.';
+
+  @override
+  String get captureCustomSttUnreachableDetail =>
+      'Votre service de reconnaissance vocale personnalisé est injoignable. Omi garde l\'audio sur ce téléphone et l\'enverra quand le service sera de retour. Rien n\'est perdu.';
+
+  @override
+  String get captureStarting => 'Démarrage…';
+
+  @override
+  String get capturePhoneStorageFull => 'Stockage du téléphone plein';
+
+  @override
+  String get captureStorageAlmostFull => 'Stockage presque plein';
+
+  @override
+  String get capturePendantDisconnectedDetail =>
+      'Votre pendentif a perdu la connexion avec ce téléphone. Omi se reconnectera tout seul quand le pendentif sera allumé et à proximité. Tout ce qui a été enregistré avant est en sécurité.';
+
+  @override
+  String participantsSummaryUncounted(String name) {
+    return '$name et d\'autres';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyTitle => 'Écoutez les réponses d’Omi';
+
+  @override
+  String get deviceOnboardingVoiceReplySample => 'C’est noté. Votre prochaine réunion commence dans vingt minutes.';
+
+  @override
+  String get deviceOnboardingAllSetTitle => 'Tout est prêt';
+
+  @override
+  String get deviceOnboardingAllSetSubtitle => 'Touchez une ligne pour la vérifier ou la modifier.';
+
+  @override
+  String get deviceOnboardingAllSetSinglePressBadge => '1×';
+
+  @override
+  String get deviceOnboardingAllSetDoublePressBadge => '2×';
+
+  @override
+  String get deviceOnboardingVoiceReplySubtitle =>
+      'Lorsque vous demandez avec le bouton, Omi peut lire sa réponse à haute voix.';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewIdle => 'Écoutez votre dernière réponse';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewPlaying => 'Jouer votre dernière réponse...';
+
+  @override
+  String deviceOnboardingVoiceReplyPreviewThroughDevice(String device) {
+    return 'Par $device';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker => 'Via le haut-parleur du téléphone';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughCurrentOutput => 'Via la sortie audio actuelle';
+
+  @override
+  String get deviceOnboardingVoiceReplyOffDescription => 'Les réponses restent à l\'écran. Rien n\'est dit.';
+
+  @override
+  String get deviceOnboardingVoiceReplyHeadphonesDescription =>
+      'Privé. Parle uniquement via le AirPods, le Bluetooth ou un casque filaire.';
+
+  @override
+  String get deviceOnboardingVoiceReplyAlwaysDescription =>
+      'Utilise le haut-parleur du téléphone lorsqu\'aucun casque n\'est connecté.';
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusOff =>
+      'Omi restera silencieux. Les réponses apparaissent toujours dans l\'application.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusHeadphonesConnected(String device) {
+    return '$device connecté. Omi parlera ici.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusHeadphonesDisconnected =>
+      'Aucun casque connecté. Omi reste silencieux jusqu\'à ce que vous en connectiez.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusAlwaysHeadphones(String device) {
+    return 'Joue via $device.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusAlwaysSpeaker => 'Joue à haute voix via le haut-parleur du téléphone.';
+
+  @override
+  String deviceOnboardingVoiceReplySettingsHint(String settings, String voiceResponse) {
+    return 'Vous pouvez modifier cela à tout moment au $settings › $voiceResponse';
+  }
+
+  @override
+  String deviceOnboardingAllSetReplayHint(String settings, String deviceSettings, String deviceTutorial) {
+    return 'Revivez cette tournée à tout moment au $settings › $deviceSettings › $deviceTutorial';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyGenericHeadphones => 'Écouteurs';
 }

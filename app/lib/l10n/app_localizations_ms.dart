@@ -935,9 +935,6 @@ class AppLocalizationsMs extends AppLocalizations {
   String get claudeDesktop => 'Claude Desktop';
 
   @override
-  String get addToClaudeConfig => 'Tambah ke claude_desktop_config.json';
-
-  @override
   String get copyConfig => 'Salin Konfigurasi';
 
   @override
@@ -2485,13 +2482,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get clearAllNodesAndConnections => 'Kosongkan semua nod dan sambungan';
 
   @override
-  String get addToClaudeDesktopConfig => 'Tambah ke claude_desktop_config.json';
-
-  @override
   String get connectAiAssistantsToData => 'Sambungkan pembantu AI ke data anda';
-
-  @override
-  String get useYourMcpApiKey => 'Gunakan kunci API MCP anda';
 
   @override
   String get realTimeTranscript => 'Transkrip Masa Nyata';
@@ -2504,12 +2495,6 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get detailedDiagnosticMessages => 'Mesej diagnostik terperinci';
-
-  @override
-  String get autoCreateSpeakers => 'Cipta Penceramah Secara Automatik';
-
-  @override
-  String get autoCreateWhenNameDetected => 'Cipta automatik apabila nama dikesan';
 
   @override
   String get followUpQuestions => 'Soalan Susulan';
@@ -11189,11 +11174,25 @@ class AppLocalizationsMs extends AppLocalizations {
       'Apabila anda menamakan seseorang, Omi menyimpan sampel suara pendek supaya dapat mengenalinya lain kali';
 
   @override
-  String get transcriptionUnavailableRecordingContinues =>
-      'Transkripsi tidak tersedia, rakaman diteruskan pada peranti dan akan diproses kemudian';
+  String get leaveBlank => 'Biarkan kosong';
 
   @override
-  String get transcriptionUnavailableSavingOnDevice => 'Transkripsi tidak tersedia · disimpan pada peranti';
+  String get mcpOAuthSetup =>
+      'Di claude.ai, tambahkan penyambung tersuai dan tampal URL pelayan. Jika Claude meminta OAuth Client ID lanjutan, gunakan nilai di bawah dan biarkan rahsia kosong — jangan sesekali gunakan kunci API MCP anda sebagai rahsia OAuth.';
+
+  @override
+  String get claudeCode => 'Claude Code';
+
+  @override
+  String get addToClaudeCodeConfig => 'Tambah ke ~/.claude.json';
+
+  @override
+  String get claudeDesktopConnectorSetup =>
+      'Di Claude Desktop → Settings → Connectors, tambahkan penyambung tersuai dan tampal URL pelayan. Jika Claude meminta OAuth Client ID lanjutan, gunakan nilai di bawah dan biarkan rahsia kosong — jangan sesekali gunakan kunci API MCP anda sebagai rahsia OAuth.';
+
+  @override
+  String get transcriptionUnavailableRecordingContinues =>
+      'Transkripsi tidak tersedia, rakaman diteruskan pada peranti dan akan diproses kemudian';
 
   @override
   String transcriptionsPendingFraction(int pending, int total) {
@@ -11251,4 +11250,133 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get openCall => 'Buka panggilan';
+
+  @override
+  String get captureRecoveryBanner => 'Audio loket tidak sampai ke aplikasi — ketik untuk membaiki';
+
+  @override
+  String get phoneRecordingBlockedByPendantBatch =>
+      'Hentikan Transcribe Later pada loket anda sebelum merakam dengan telefon.';
+
+  @override
+  String get captureNotTranscribing => 'Tiada transkripsi';
+
+  @override
+  String get captureAudioSavedTranscribesLater => 'Audio disimpan, ditranskripsi kemudian';
+
+  @override
+  String get captureStillRecording => 'Masih merakam';
+
+  @override
+  String get captureMicInUseElsewhere => 'Mikrofon digunakan oleh apl lain';
+
+  @override
+  String get captureMicInterruptedDetail =>
+      'Panggilan atau apl lain sedang menggunakan mikrofon, jadi Omi tidak dapat mendengar sekarang. Omi akan bersambung sendiri apabila mikrofon bebas. Semua yang dirakam sebelum ini selamat.';
+
+  @override
+  String get captureCustomSttUnreachableDetail =>
+      'Perkhidmatan pertuturan-ke-teks tersuai anda tidak dapat dicapai. Omi menyimpan audio pada telefon ini dan menghantarnya apabila perkhidmatan kembali. Tiada apa yang hilang.';
+
+  @override
+  String get captureStarting => 'Memulakan…';
+
+  @override
+  String get capturePhoneStorageFull => 'Storan telefon penuh';
+
+  @override
+  String get captureStorageAlmostFull => 'Storan hampir penuh';
+
+  @override
+  String get capturePendantDisconnectedDetail =>
+      'Loket anda terputus sambungan dengan telefon ini. Omi akan bersambung semula sendiri apabila loket dihidupkan dan berdekatan. Semua yang dirakam sebelum ini selamat.';
+
+  @override
+  String participantsSummaryUncounted(String name) {
+    return '$name dan lain-lain';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyTitle => 'Dengar jawapan Omi';
+
+  @override
+  String get deviceOnboardingVoiceReplySample =>
+      'Baik. Mesyuarat anda yang seterusnya bermula dalam masa dua puluh minit.';
+
+  @override
+  String get deviceOnboardingAllSetTitle => 'Semuanya Sudah Sedia';
+
+  @override
+  String get deviceOnboardingAllSetSubtitle => 'Ketik baris untuk menyemak atau mengubahnya.';
+
+  @override
+  String get deviceOnboardingAllSetSinglePressBadge => '1×';
+
+  @override
+  String get deviceOnboardingAllSetDoublePressBadge => '2×';
+
+  @override
+  String get deviceOnboardingVoiceReplySubtitle =>
+      'Apabila anda bertanya dengan butang, Omi boleh membaca jawapannya dengan kuat.';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewIdle => 'Dengar jawapan terakhir anda';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewPlaying => 'Memainkan jawapan terakhir anda...';
+
+  @override
+  String deviceOnboardingVoiceReplyPreviewThroughDevice(String device) {
+    return 'Melalui $device';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker => 'Melalui pembesar suara telefon';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughCurrentOutput => 'Melalui output audio semasa';
+
+  @override
+  String get deviceOnboardingVoiceReplyOffDescription => 'Jawapan kekal di skrin. Tiada apa yang terucap.';
+
+  @override
+  String get deviceOnboardingVoiceReplyHeadphonesDescription =>
+      'Persendirian. Bercakap hanya melalui AirPods, Bluetooth atau fon kepala berwayar.';
+
+  @override
+  String get deviceOnboardingVoiceReplyAlwaysDescription =>
+      'Menggunakan pembesar suara telefon apabila tiada fon kepala disambungkan.';
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusOff => 'Omi akan terus senyap. Jawapan masih muncul dalam apl.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusHeadphonesConnected(String device) {
+    return '$device disambungkan. Omi akan bercakap di sini.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusHeadphonesDisconnected =>
+      'Tiada fon kepala disambungkan. Omi kekal senyap sehingga anda menyambung beberapa.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusAlwaysHeadphones(String device) {
+    return 'Dimainkan melalui $device.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusAlwaysSpeaker => 'Dimainkan dengan kuat melalui pembesar suara telefon.';
+
+  @override
+  String deviceOnboardingVoiceReplySettingsHint(String settings, String voiceResponse) {
+    return 'Anda boleh menukar ini pada bila-bila masa di $settings › $voiceResponse';
+  }
+
+  @override
+  String deviceOnboardingAllSetReplayHint(String settings, String deviceSettings, String deviceTutorial) {
+    return 'Main semula lawatan ini pada bila-bila masa dalam $settings › $deviceSettings › $deviceTutorial';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyGenericHeadphones => 'Fon kepala';
 }

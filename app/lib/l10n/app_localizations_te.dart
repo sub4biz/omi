@@ -936,9 +936,6 @@ class AppLocalizationsTe extends AppLocalizations {
   String get claudeDesktop => 'Claude డెస్క్‌టాప్';
 
   @override
-  String get addToClaudeConfig => 'claude_desktop_config.json కు జోడించండి';
-
-  @override
   String get copyConfig => 'కాన్ఫిగ్ కాపీ చేయండి';
 
   @override
@@ -2492,13 +2489,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get clearAllNodesAndConnections => 'సమస్త నోడ్‌లు మరియు కనెక్షన్‌లను క్లియర్ చేయండి';
 
   @override
-  String get addToClaudeDesktopConfig => 'claude_desktop_config.json కు జోడించండి';
-
-  @override
   String get connectAiAssistantsToData => 'AI సహాయకులను మీ డేటాకు కనెక్ట్ చేయండి';
-
-  @override
-  String get useYourMcpApiKey => 'మీ MCP API కీని ఉపయోగించండి';
 
   @override
   String get realTimeTranscript => 'రియల్-టైమ్ ట్రాన్‌స్క్రిప్ట్';
@@ -2511,12 +2502,6 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get detailedDiagnosticMessages => 'వివరణాత్మక నిర్ధారణ సందేశాలు';
-
-  @override
-  String get autoCreateSpeakers => 'స్పీకర్‌లను స్వయంచాలకంగా సృష్టించండి';
-
-  @override
-  String get autoCreateWhenNameDetected => 'పేరు కనుగొనబడినప్పుడు స్వయంచాలకంగా సృష్టించండి';
 
   @override
   String get followUpQuestions => 'అనుసరణ ప్రశ్నలు';
@@ -11208,11 +11193,25 @@ class AppLocalizationsTe extends AppLocalizations {
       'మీరు ఎవరికైనా పేరు పెట్టినప్పుడు, తదుపరిసారి గుర్తించడానికి Omi ఒక చిన్న గొంతు నమూనాను ఉంచుకుంటుంది';
 
   @override
-  String get transcriptionUnavailableRecordingContinues =>
-      'ట్రాన్స్‌క్రిప్షన్‌లు అందుబాటులో లేవు, రికార్డింగ్ పరికరంలో కొనసాగుతుంది మరియు తర్వాత ప్రాసెస్ చేయబడుతుంది';
+  String get leaveBlank => 'ఖాళీగా ఉంచండి';
 
   @override
-  String get transcriptionUnavailableSavingOnDevice => 'ట్రాన్స్‌క్రిప్షన్ అందుబాటులో లేదు · పరికరంలో సేవ్ చేయబడుతోంది';
+  String get mcpOAuthSetup =>
+      'claude.ai లో కస్టమ్ కనెక్టర్‌ను జోడించి, సర్వర్ URL ను పేస్ట్ చేయండి. Claude అడ్వాన్స్డ్ OAuth Client ID అడిగితే, కింది విలువను ఉపయోగించి, సీక్రెట్‌ను ఖాళీగా ఉంచండి — మీ MCP API కీని OAuth సీక్రెట్‌గా ఎప్పుడూ ఉపయోగించకండి.';
+
+  @override
+  String get claudeCode => 'Claude Code';
+
+  @override
+  String get addToClaudeCodeConfig => '~/.claude.json కు జోడించండి';
+
+  @override
+  String get claudeDesktopConnectorSetup =>
+      'Claude Desktop → Settings → Connectors లో కస్టమ్ కనెక్టర్‌ను జోడించి, సర్వర్ URL ను పేస్ట్ చేయండి. Claude అడ్వాన్స్డ్ OAuth Client ID అడిగితే, కింది విలువను ఉపయోగించి, సీక్రెట్‌ను ఖాళీగా ఉంచండి — మీ MCP API కీని OAuth సీక్రెట్‌గా ఎప్పుడూ ఉపయోగించకండి.';
+
+  @override
+  String get transcriptionUnavailableRecordingContinues =>
+      'ట్రాన్స్‌క్రిప్షన్‌లు అందుబాటులో లేవు, రికార్డింగ్ పరికరంలో కొనసాగుతుంది మరియు తర్వాత ప్రాసెస్ చేయబడుతుంది';
 
   @override
   String transcriptionsPendingFraction(int pending, int total) {
@@ -11270,4 +11269,131 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get openCall => 'కాల్‌ను తెరవండి';
+
+  @override
+  String get captureRecoveryBanner => 'పెండెంట్ ఆడియో యాప్‌కు చేరడం లేదు — రిపేర్ చేయడానికి ట్యాప్ చేయండి';
+
+  @override
+  String get phoneRecordingBlockedByPendantBatch =>
+      'మీ ఫోన్‌తో రికార్డ్ చేయడానికి ముందు మీ పెండెంట్‌లో Transcribe Later ఆపండి.';
+
+  @override
+  String get captureNotTranscribing => 'ట్రాన్స్‌క్రిప్షన్ లేదు';
+
+  @override
+  String get captureAudioSavedTranscribesLater => 'ఆడియో సేవ్ అయింది, తర్వాత ట్రాన్స్‌క్రైబ్ అవుతుంది';
+
+  @override
+  String get captureStillRecording => 'ఇంకా రికార్డ్ అవుతోంది';
+
+  @override
+  String get captureMicInUseElsewhere => 'మైక్‌ను వేరే యాప్ ఉపయోగిస్తోంది';
+
+  @override
+  String get captureMicInterruptedDetail =>
+      'ఒక కాల్ లేదా వేరే యాప్ మైక్రోఫోన్‌ను తీసుకుంది, కాబట్టి Omi ఇప్పుడు వినలేదు. మైక్రోఫోన్ ఖాళీ అయినప్పుడు Omi తనంతట తానే కొనసాగుతుంది. దీనికి ముందు రికార్డ్ అయినవన్నీ సురక్షితంగా ఉన్నాయి.';
+
+  @override
+  String get captureCustomSttUnreachableDetail =>
+      'మీ కస్టమ్ స్పీచ్-టు-టెక్స్ట్ సేవను చేరుకోలేకపోతున్నాం. Omi ఆడియోను ఈ ఫోన్‌లో ఉంచి, సేవ తిరిగి వచ్చినప్పుడు పంపుతుంది. ఏదీ కోల్పోదు.';
+
+  @override
+  String get captureStarting => 'ప్రారంభమవుతోంది…';
+
+  @override
+  String get capturePhoneStorageFull => 'ఫోన్ స్టోరేజ్ నిండింది';
+
+  @override
+  String get captureStorageAlmostFull => 'స్టోరేజ్ దాదాపు నిండింది';
+
+  @override
+  String get capturePendantDisconnectedDetail =>
+      'మీ పెండెంట్ ఈ ఫోన్‌తో కనెక్షన్ కోల్పోయింది. పెండెంట్ ఆన్‌లో ఉండి దగ్గరగా ఉన్నప్పుడు Omi తనంతట తానే మళ్లీ కనెక్ట్ అవుతుంది. దీనికి ముందు రికార్డ్ అయినవన్నీ సురక్షితంగా ఉన్నాయి.';
+
+  @override
+  String participantsSummaryUncounted(String name) {
+    return '$name మరియు ఇతరులు';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyTitle => 'Omi సమాధానాలను వినండి';
+
+  @override
+  String get deviceOnboardingVoiceReplySample => 'అర్థమైంది. మీ తదుపరి సమావేశం ఇరవై నిమిషాల్లో ప్రారంభమవుతుంది.';
+
+  @override
+  String get deviceOnboardingAllSetTitle => 'అన్నీ సిద్ధంగా ఉన్నాయి';
+
+  @override
+  String get deviceOnboardingAllSetSubtitle => 'సమీక్షించడానికి లేదా మార్చడానికి వరుసను నొక్కండి.';
+
+  @override
+  String get deviceOnboardingAllSetSinglePressBadge => '1×';
+
+  @override
+  String get deviceOnboardingAllSetDoublePressBadge => '2×';
+
+  @override
+  String get deviceOnboardingVoiceReplySubtitle => 'మీరు బటన్‌తో అడిగినప్పుడు, Omi దాని సమాధానాన్ని బిగ్గరగా చదవగలదు.';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewIdle => 'మీ చివరి సమాధానం వినండి';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewPlaying => 'మీ చివరి సమాధానాన్ని ప్లే చేస్తోంది...';
+
+  @override
+  String deviceOnboardingVoiceReplyPreviewThroughDevice(String device) {
+    return '$device ద్వారా';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker => 'ఫోన్ స్పీకర్ ద్వారా';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughCurrentOutput => 'ప్రస్తుత ఆడియో అవుట్‌పుట్ ద్వారా';
+
+  @override
+  String get deviceOnboardingVoiceReplyOffDescription => 'సమాధానాలు తెరపైనే ఉంటాయి. ఏమీ మాట్లాడలేదు.';
+
+  @override
+  String get deviceOnboardingVoiceReplyHeadphonesDescription =>
+      'ప్రైవేట్. AirPods, Bluetooth లేదా వైర్డు హెడ్‌ఫోన్‌ల ద్వారా మాత్రమే మాట్లాడుతుంది.';
+
+  @override
+  String get deviceOnboardingVoiceReplyAlwaysDescription =>
+      'హెడ్‌ఫోన్‌లు కనెక్ట్ కానప్పుడు ఫోన్ స్పీకర్‌ని ఉపయోగిస్తుంది.';
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusOff => 'Omi మౌనంగా ఉంటుంది. సమాధానాలు ఇప్పటికీ యాప్‌లో కనిపిస్తాయి.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusHeadphonesConnected(String device) {
+    return '$device కనెక్ట్ చేయబడింది. Omi ఇక్కడ మాట్లాడతారు.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusHeadphonesDisconnected =>
+      'హెడ్‌ఫోన్‌లు కనెక్ట్ కాలేదు. మీరు కొన్నింటిని కనెక్ట్ చేసే వరకు Omi నిశ్శబ్దంగా ఉంటుంది.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusAlwaysHeadphones(String device) {
+    return '$device ద్వారా ఆడుతుంది.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusAlwaysSpeaker => 'ఫోన్ స్పీకర్ ద్వారా బిగ్గరగా ప్లే చేస్తుంది.';
+
+  @override
+  String deviceOnboardingVoiceReplySettingsHint(String settings, String voiceResponse) {
+    return 'మీరు దీన్ని ఎప్పుడైనా $settings › $voiceResponseలో మార్చవచ్చు';
+  }
+
+  @override
+  String deviceOnboardingAllSetReplayHint(String settings, String deviceSettings, String deviceTutorial) {
+    return 'ఈ పర్యటనను ఎప్పుడైనా $settings › $deviceSettings › $deviceTutorialలో మళ్లీ ప్లే చేయండి';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyGenericHeadphones => 'హెడ్‌ఫోన్‌లు';
 }

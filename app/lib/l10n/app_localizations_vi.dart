@@ -936,9 +936,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get claudeDesktop => 'Claude Desktop';
 
   @override
-  String get addToClaudeConfig => 'Thêm vào claude_desktop_config.json';
-
-  @override
   String get copyConfig => 'Sao chép cấu hình';
 
   @override
@@ -2479,13 +2476,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get clearAllNodesAndConnections => 'Xóa tất cả các nút và kết nối';
 
   @override
-  String get addToClaudeDesktopConfig => 'Thêm vào claude_desktop_config.json';
-
-  @override
   String get connectAiAssistantsToData => 'Kết nối trợ lý AI với dữ liệu của bạn';
-
-  @override
-  String get useYourMcpApiKey => 'Sử dụng khóa API MCP của bạn';
 
   @override
   String get realTimeTranscript => 'Bản ghi âm Thời gian thực';
@@ -2498,12 +2489,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get detailedDiagnosticMessages => 'Thông báo chẩn đoán chi tiết';
-
-  @override
-  String get autoCreateSpeakers => 'Tự động tạo Người nói';
-
-  @override
-  String get autoCreateWhenNameDetected => 'Tự động tạo khi phát hiện tên';
 
   @override
   String get followUpQuestions => 'Câu hỏi Theo dõi';
@@ -11155,11 +11140,25 @@ class AppLocalizationsVi extends AppLocalizations {
       'Khi bạn đặt tên cho ai đó, Omi lưu một mẫu giọng ngắn để nhận ra họ vào lần sau';
 
   @override
-  String get transcriptionUnavailableRecordingContinues =>
-      'Bản chép âm không khả dụng, quá trình ghi âm tiếp tục trên thiết bị và sẽ được xử lý sau';
+  String get leaveBlank => 'Để trống';
 
   @override
-  String get transcriptionUnavailableSavingOnDevice => 'Bản chép âm không khả dụng · đang lưu trên thiết bị';
+  String get mcpOAuthSetup =>
+      'Trên claude.ai, thêm trình kết nối tùy chỉnh và dán URL máy chủ. Nếu Claude yêu cầu OAuth Client ID nâng cao, hãy dùng giá trị bên dưới và để trống phần bí mật — không bao giờ dùng khóa API MCP của bạn làm bí mật OAuth.';
+
+  @override
+  String get claudeCode => 'Claude Code';
+
+  @override
+  String get addToClaudeCodeConfig => 'Thêm vào ~/.claude.json';
+
+  @override
+  String get claudeDesktopConnectorSetup =>
+      'Trên Claude Desktop → Settings → Connectors, thêm trình kết nối tùy chỉnh và dán URL máy chủ. Nếu Claude yêu cầu OAuth Client ID nâng cao, hãy dùng giá trị bên dưới và để trống phần bí mật — không bao giờ dùng khóa API MCP của bạn làm bí mật OAuth.';
+
+  @override
+  String get transcriptionUnavailableRecordingContinues =>
+      'Bản chép âm không khả dụng, quá trình ghi âm tiếp tục trên thiết bị và sẽ được xử lý sau';
 
   @override
   String transcriptionsPendingFraction(int pending, int total) {
@@ -11217,4 +11216,131 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get openCall => 'Mở cuộc gọi';
+
+  @override
+  String get captureRecoveryBanner => 'Âm thanh từ mặt dây chuyền không đến được ứng dụng — chạm để sửa chữa';
+
+  @override
+  String get phoneRecordingBlockedByPendantBatch =>
+      'Dừng Transcribe Later trên mặt dây trước khi ghi âm bằng điện thoại.';
+
+  @override
+  String get captureNotTranscribing => 'Không phiên âm';
+
+  @override
+  String get captureAudioSavedTranscribesLater => 'Đã lưu âm thanh, phiên âm sau';
+
+  @override
+  String get captureStillRecording => 'Vẫn đang ghi âm';
+
+  @override
+  String get captureMicInUseElsewhere => 'Ứng dụng khác đang dùng micrô';
+
+  @override
+  String get captureMicInterruptedDetail =>
+      'Một cuộc gọi hoặc ứng dụng khác đang dùng micrô nên Omi hiện không nghe được. Omi sẽ tự tiếp tục khi micrô rảnh. Mọi thứ đã ghi trước đó vẫn an toàn.';
+
+  @override
+  String get captureCustomSttUnreachableDetail =>
+      'Không thể kết nối dịch vụ chuyển giọng nói thành văn bản tùy chỉnh của bạn. Omi giữ âm thanh trên điện thoại này và sẽ gửi khi dịch vụ hoạt động trở lại. Không có gì bị mất.';
+
+  @override
+  String get captureStarting => 'Đang bắt đầu…';
+
+  @override
+  String get capturePhoneStorageFull => 'Bộ nhớ điện thoại đầy';
+
+  @override
+  String get captureStorageAlmostFull => 'Bộ nhớ gần đầy';
+
+  @override
+  String get capturePendantDisconnectedDetail =>
+      'Mặt dây chuyền đã mất kết nối với điện thoại này. Omi sẽ tự kết nối lại khi mặt dây chuyền bật và ở gần. Mọi thứ đã ghi trước đó vẫn an toàn.';
+
+  @override
+  String participantsSummaryUncounted(String name) {
+    return '$name và những người khác';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyTitle => 'Nghe câu trả lời của Omi';
+
+  @override
+  String get deviceOnboardingVoiceReplySample =>
+      'Tôi hiểu rồi. Cuộc họp tiếp theo của bạn bắt đầu sau hai mươi phút nữa.';
+
+  @override
+  String get deviceOnboardingAllSetTitle => 'Bạn đã sẵn sàng';
+
+  @override
+  String get deviceOnboardingAllSetSubtitle => 'Nhấn vào một hàng để xem lại hoặc thay đổi.';
+
+  @override
+  String get deviceOnboardingAllSetSinglePressBadge => '1×';
+
+  @override
+  String get deviceOnboardingAllSetDoublePressBadge => '2×';
+
+  @override
+  String get deviceOnboardingVoiceReplySubtitle => 'Khi bạn hỏi bằng nút, Omi có thể đọc to câu trả lời của nó.';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewIdle => 'Nghe câu trả lời cuối cùng của bạn';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewPlaying => 'Đang phát câu trả lời cuối cùng của bạn...';
+
+  @override
+  String deviceOnboardingVoiceReplyPreviewThroughDevice(String device) {
+    return 'Qua $device';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker => 'Qua loa điện thoại';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughCurrentOutput => 'Thông qua đầu ra âm thanh hiện tại';
+
+  @override
+  String get deviceOnboardingVoiceReplyOffDescription => 'Câu trả lời vẫn ở trên màn hình. Không có gì được nói.';
+
+  @override
+  String get deviceOnboardingVoiceReplyHeadphonesDescription =>
+      'Riêng tư. Chỉ nói qua AirPods, Bluetooth hoặc tai nghe có dây.';
+
+  @override
+  String get deviceOnboardingVoiceReplyAlwaysDescription => 'Sử dụng loa điện thoại khi không kết nối tai nghe.';
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusOff => 'Omi sẽ giữ im lặng. Câu trả lời vẫn xuất hiện trong ứng dụng.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusHeadphonesConnected(String device) {
+    return '$device đã kết nối. Omi sẽ phát biểu tại đây.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusHeadphonesDisconnected =>
+      'Không có tai nghe được kết nối. Omi giữ im lặng cho đến khi bạn kết nối.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusAlwaysHeadphones(String device) {
+    return 'Phát qua $device.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusAlwaysSpeaker => 'Phát to qua loa điện thoại.';
+
+  @override
+  String deviceOnboardingVoiceReplySettingsHint(String settings, String voiceResponse) {
+    return 'Bạn có thể thay đổi điều này bất cứ lúc nào trong $settings > $voiceResponse';
+  }
+
+  @override
+  String deviceOnboardingAllSetReplayHint(String settings, String deviceSettings, String deviceTutorial) {
+    return 'Phát lại chuyến tham quan này bất cứ lúc nào trong $settings > $deviceSettings > $deviceTutorial';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyGenericHeadphones => 'Tai nghe';
 }

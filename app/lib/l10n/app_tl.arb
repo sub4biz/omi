@@ -1114,7 +1114,6 @@
     "daySummary": "Day Summary",
     "summaryGenerated": "Summary ay nabuo",
     "claudeDesktop": "Claude Desktop",
-    "addToClaudeConfig": "Idagdag sa claude_desktop_config.json",
     "copyConfig": "Kopyahin ang Config",
     "configCopied": "Config ay kinopya sa clipboard",
     "listeningMins": "Nakikinig (mins)",
@@ -2636,10 +2635,6 @@
     "@claudeDesktop": {
         "description": "Claude Desktop integration section"
     },
-    "addToClaudeDesktopConfig": "Idagdag sa claude_desktop_config.json",
-    "@addToClaudeDesktopConfig": {
-        "description": "Description for Claude Desktop config"
-    },
     "@configCopiedToClipboard": {
         "description": "Confirmation when config is copied"
     },
@@ -2673,10 +2668,6 @@
     },
     "@clientSecret": {
         "description": "OAuth client secret label"
-    },
-    "useYourMcpApiKey": "Gamitin ang iyong MCP API key",
-    "@useYourMcpApiKey": {
-        "description": "Hint for client secret value"
     },
     "@webhooks": {
         "description": "Webhooks section header"
@@ -2720,14 +2711,6 @@
     "detailedDiagnosticMessages": "Detailed na mga diagnostic messages",
     "@detailedDiagnosticMessages": {
         "description": "Description for transcription diagnostics"
-    },
-    "autoCreateSpeakers": "Awtomatikong Lumikha ng Speakers",
-    "@autoCreateSpeakers": {
-        "description": "Experimental feature name"
-    },
-    "autoCreateWhenNameDetected": "Awtomatikong lumikha kapag ang pangalan ay natuklasan",
-    "@autoCreateWhenNameDetected": {
-        "description": "Description for auto-create speakers"
     },
     "followUpQuestions": "Follow-up Questions",
     "@followUpQuestions": {
@@ -11097,8 +11080,12 @@
     "voiceSettingsAskToTag": "Hilingin sa akin na i-tag ang mga boses",
     "voiceSettingsAskToTagSubtitle": "Paminsan-minsan, itatanong ng Omi kung sino ang nagsasalita sa mga kamakailan mong pag-uusap",
     "voiceSettingsSaveOthersSubtitle": "Kapag pinangalanan mo ang isang tao, nagtatago ang Omi ng maikling sample ng boses para makilala siya sa susunod",
+    "leaveBlank": "Iwanang blangko",
+    "mcpOAuthSetup": "Sa claude.ai, magdagdag ng custom connector at i-paste ang URL ng server. Kung hihingi ang Claude ng advanced na OAuth Client ID, gamitin ang halaga sa ibaba at iwanang blangko ang secret — huwag kailanman gamitin ang iyong MCP API key bilang OAuth secret.",
+    "claudeCode": "Claude Code",
+    "addToClaudeCodeConfig": "Idagdag sa ~/.claude.json",
+    "claudeDesktopConnectorSetup": "Sa Claude Desktop → Settings → Connectors, magdagdag ng custom connector at i-paste ang URL ng server. Kung hihingi ang Claude ng advanced na OAuth Client ID, gamitin ang halaga sa ibaba at iwanang blangko ang secret — huwag kailanman gamitin ang iyong MCP API key bilang OAuth secret.",
     "transcriptionUnavailableRecordingContinues": "Hindi available ang mga transcript, nagpapatuloy ang pag-record sa device at ipoproseso mamaya",
-    "transcriptionUnavailableSavingOnDevice": "Hindi available ang transcript · naka-save sa device",
     "transcriptionsPendingFraction": "Mga transcript na naghihintay {pending}/{total}",
     "transcriptionsPendingCount": "Mga transcript na naghihintay {count}",
     "captureSourceCall": "Tawag",
@@ -11115,5 +11102,41 @@
     "keepUsingPendant": "Ituloy ang paggamit ng pendant",
     "recordWith": "Mag-record gamit ang",
     "moreWaysToRecord": "Iba pang paraan ng pag-record",
-    "openCall": "Buksan ang tawag"
+    "openCall": "Buksan ang tawag",
+    "captureRecoveryBanner": "Hindi nakakarating sa app ang audio ng pendant — i-tap para ayusin",
+    "phoneRecordingBlockedByPendantBatch": "Itigil ang Transcribe Later sa iyong pendant bago mag-record gamit ang telepono.",
+    "captureNotTranscribing": "Hindi nagta-transcribe",
+    "captureAudioSavedTranscribesLater": "Na-save ang audio, ita-transcribe mamaya",
+    "captureStillRecording": "Nagre-record pa rin",
+    "captureMicInUseElsewhere": "Ginagamit ng ibang app ang mic",
+    "captureMicInterruptedDetail": "Kinuha ng isang tawag o ibang app ang mikropono, kaya hindi nakakarinig ang Omi ngayon. Kusang magpapatuloy ang Omi kapag malaya na ang mikropono. Ligtas ang lahat ng na-record bago nito.",
+    "captureCustomSttUnreachableDetail": "Hindi maabot ang iyong custom na speech-to-text na serbisyo. Itinatabi ng Omi ang audio sa teleponong ito at ipapadala kapag bumalik ang serbisyo. Walang mawawala.",
+    "captureStarting": "Nagsisimula…",
+    "capturePhoneStorageFull": "Puno na ang storage ng telepono",
+    "captureStorageAlmostFull": "Halos puno na ang storage",
+    "capturePendantDisconnectedDetail": "Nawalan ng koneksyon ang iyong pendant sa teleponong ito. Kusang kokonekta muli ang Omi kapag naka-on at malapit ang pendant. Ligtas ang lahat ng na-record bago nito.",
+    "participantsSummaryUncounted": "{name} at iba pa",
+    "deviceOnboardingVoiceReplyTitle": "Pakinggan ang mga sagot ni Omi",
+    "deviceOnboardingVoiceReplySample": "Nakuha ko. Magsisimula ang susunod mong meeting sa loob ng dalawampung minuto.",
+    "deviceOnboardingAllSetTitle": "Handa Ka Na",
+    "deviceOnboardingAllSetSubtitle": "I-tap ang isang row para suriin o baguhin ito.",
+    "deviceOnboardingAllSetSinglePressBadge": "1×",
+    "deviceOnboardingAllSetDoublePressBadge": "2×",
+    "deviceOnboardingVoiceReplySubtitle": "Kapag nagtanong ka gamit ang button, mababasa ng Omi ang sagot nito nang malakas.",
+    "deviceOnboardingVoiceReplyPreviewIdle": "Pakinggan ang iyong huling sagot",
+    "deviceOnboardingVoiceReplyPreviewPlaying": "Pinapatugtog ang iyong huling sagot...",
+    "deviceOnboardingVoiceReplyPreviewThroughDevice": "Sa pamamagitan ng {device}",
+    "deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker": "Sa pamamagitan ng speaker ng telepono",
+    "deviceOnboardingVoiceReplyPreviewThroughCurrentOutput": "Sa pamamagitan ng kasalukuyang output ng audio",
+    "deviceOnboardingVoiceReplyOffDescription": "Mananatili sa screen ang mga sagot. Walang sinasabi.",
+    "deviceOnboardingVoiceReplyHeadphonesDescription": "Pribado. Nagsasalita lamang sa pamamagitan ng AirPods, Bluetooth o wired headphones.",
+    "deviceOnboardingVoiceReplyAlwaysDescription": "Ginagamit ang speaker ng telepono kapag walang nakakonektang headphone.",
+    "deviceOnboardingVoiceReplyStatusOff": "Omi mananatiling tahimik. Lumalabas pa rin ang mga sagot sa app.",
+    "deviceOnboardingVoiceReplyStatusHeadphonesConnected": "{device} konektado. Omi ang magsasalita dito.",
+    "deviceOnboardingVoiceReplyStatusHeadphonesDisconnected": "Walang nakakonektang headphone. Omi mananatiling tahimik hanggang sa kumonekta ka ng ilan.",
+    "deviceOnboardingVoiceReplyStatusAlwaysHeadphones": "Nagpe-play sa pamamagitan ng {device}.",
+    "deviceOnboardingVoiceReplyStatusAlwaysSpeaker": "Tumutugtog nang malakas sa pamamagitan ng speaker ng telepono.",
+    "deviceOnboardingVoiceReplySettingsHint": "Maaari mo itong baguhin anumang oras sa {settings} › {voiceResponse}",
+    "deviceOnboardingAllSetReplayHint": "I-replay ang tour na ito anumang oras sa {settings} › {deviceSettings} › {deviceTutorial}",
+    "deviceOnboardingVoiceReplyGenericHeadphones": "Mga headphone"
 }

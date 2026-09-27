@@ -933,9 +933,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get claudeDesktop => 'Claude Desktop';
 
   @override
-  String get addToClaudeConfig => 'Додај на claude_desktop_config.json';
-
-  @override
   String get copyConfig => 'Копирај конфигурацију';
 
   @override
@@ -2482,13 +2479,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get clearAllNodesAndConnections => 'Очисти све чворове и везе';
 
   @override
-  String get addToClaudeDesktopConfig => 'Додај у claude_desktop_config.json';
-
-  @override
   String get connectAiAssistantsToData => 'Повежи AI асистенте са својим подацима';
-
-  @override
-  String get useYourMcpApiKey => 'Користи свој MCP API кључ';
 
   @override
   String get realTimeTranscript => 'Транскрипт у реалном времену';
@@ -2501,12 +2492,6 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get detailedDiagnosticMessages => 'Детаљне дијагностичке поруке';
-
-  @override
-  String get autoCreateSpeakers => 'Аутоматски создај говорнике';
-
-  @override
-  String get autoCreateWhenNameDetected => 'Аутоматски создај када је име откривено';
 
   @override
   String get followUpQuestions => 'Додатна питања';
@@ -11175,11 +11160,25 @@ class AppLocalizationsSr extends AppLocalizations {
       'Када некога именујете, Omi чува кратак узорак гласа да би га следећи пут препознао';
 
   @override
-  String get transcriptionUnavailableRecordingContinues =>
-      'Транскрипције нису доступне, снимање се наставља на уређају и биће обрађено касније';
+  String get leaveBlank => 'Оставите празно';
 
   @override
-  String get transcriptionUnavailableSavingOnDevice => 'Транскрипција недоступна · чува се на уређају';
+  String get mcpOAuthSetup =>
+      'На claude.ai додајте прилагођени конектор и налепите URL сервера. Ако Claude тражи напредни OAuth Client ID, користите вредност испод и оставите тајну празном — никада не користите свој MCP API кључ као OAuth тајну.';
+
+  @override
+  String get claudeCode => 'Claude Code';
+
+  @override
+  String get addToClaudeCodeConfig => 'Додај у ~/.claude.json';
+
+  @override
+  String get claudeDesktopConnectorSetup =>
+      'На Claude Desktop → Settings → Connectors додајте прилагођени конектор и налепите URL сервера. Ако Claude тражи напредни OAuth Client ID, користите вредност испод и оставите тајну празном — никада не користите свој MCP API кључ као OAuth тајну.';
+
+  @override
+  String get transcriptionUnavailableRecordingContinues =>
+      'Транскрипције нису доступне, снимање се наставља на уређају и биће обрађено касније';
 
   @override
   String transcriptionsPendingFraction(int pending, int total) {
@@ -11237,4 +11236,130 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get openCall => 'Отвори позив';
+
+  @override
+  String get captureRecoveryBanner => 'Звук привеска не стиже до апликације — додирните за поправку';
+
+  @override
+  String get phoneRecordingBlockedByPendantBatch => 'Zaustavite Transcribe Later na privesku pre snimanja telefonom.';
+
+  @override
+  String get captureNotTranscribing => 'Нема транскрипције';
+
+  @override
+  String get captureAudioSavedTranscribesLater => 'Звук је сачуван, транскрипција касније';
+
+  @override
+  String get captureStillRecording => 'Снимање се наставља';
+
+  @override
+  String get captureMicInUseElsewhere => 'Микрофон користи друга апликација';
+
+  @override
+  String get captureMicInterruptedDetail =>
+      'Позив или друга апликација преузела је микрофон, па Omi тренутно не чује. Omi ће сам наставити кад микрофон буде слободан. Све снимљено до сада је безбедно.';
+
+  @override
+  String get captureCustomSttUnreachableDetail =>
+      'Ваша прилагођена услуга претварања говора у текст није доступна. Omi чува звук на овом телефону и послаће га кад се услуга врати. Ништа се не губи.';
+
+  @override
+  String get captureStarting => 'Покретање…';
+
+  @override
+  String get capturePhoneStorageFull => 'Меморија телефона је пуна';
+
+  @override
+  String get captureStorageAlmostFull => 'Меморија је скоро пуна';
+
+  @override
+  String get capturePendantDisconnectedDetail =>
+      'Привезак је изгубио везу са овим телефоном. Omi ће се сам поново повезати кад је привезак укључен и у близини. Све снимљено до сада је безбедно.';
+
+  @override
+  String participantsSummaryUncounted(String name) {
+    return '$name и други';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyTitle => 'Чујте Omi одговоре';
+
+  @override
+  String get deviceOnboardingVoiceReplySample => 'Разумем. Ваш следећи састанак почиње за двадесет минута.';
+
+  @override
+  String get deviceOnboardingAllSetTitle => 'Све је спремно';
+
+  @override
+  String get deviceOnboardingAllSetSubtitle => 'Додирните ред да бисте га прегледали или променили.';
+
+  @override
+  String get deviceOnboardingAllSetSinglePressBadge => '1×';
+
+  @override
+  String get deviceOnboardingAllSetDoublePressBadge => '2×';
+
+  @override
+  String get deviceOnboardingVoiceReplySubtitle =>
+      'Када питате помоћу дугмета, Omi може да прочита свој одговор наглас.';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewIdle => 'Чуј свој последњи одговор';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewPlaying => 'Пуштање вашег последњег одговора...';
+
+  @override
+  String deviceOnboardingVoiceReplyPreviewThroughDevice(String device) {
+    return 'Преко $device';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker => 'Преко звучника телефона';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughCurrentOutput => 'Преко тренутног аудио излаза';
+
+  @override
+  String get deviceOnboardingVoiceReplyOffDescription => 'Одговори остају на екрану. Ништа се не говори.';
+
+  @override
+  String get deviceOnboardingVoiceReplyHeadphonesDescription =>
+      'Приватно. Говори само преко AirPods, Bluetooth или жичаних слушалица.';
+
+  @override
+  String get deviceOnboardingVoiceReplyAlwaysDescription => 'Користи звучник телефона када нису повезане слушалице.';
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusOff => 'Omi ће ћутати. Одговори се и даље појављују у апликацији.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusHeadphonesConnected(String device) {
+    return '$device повезан. Omi ће говорити овде.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusHeadphonesDisconnected =>
+      'Нису повезане слушалице. Omi ћути док не повежете неке.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusAlwaysHeadphones(String device) {
+    return 'Репродуцира преко $device.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusAlwaysSpeaker => 'Свира наглас преко звучника телефона.';
+
+  @override
+  String deviceOnboardingVoiceReplySettingsHint(String settings, String voiceResponse) {
+    return 'Ово можете променити било када у $settings › $voiceResponse';
+  }
+
+  @override
+  String deviceOnboardingAllSetReplayHint(String settings, String deviceSettings, String deviceTutorial) {
+    return 'Поновите овај обилазак било када у $settings › $deviceSettings › $deviceTutorial';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyGenericHeadphones => 'Слушалице';
 }

@@ -932,9 +932,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get claudeDesktop => 'Claude Desktop';
 
   @override
-  String get addToClaudeConfig => 'Lisää claude_desktop_config.json-tiedostoon';
-
-  @override
   String get copyConfig => 'Kopioi kokoonpano';
 
   @override
@@ -2476,13 +2473,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get clearAllNodesAndConnections => 'Tyhjennä kaikki solmut ja yhteydet';
 
   @override
-  String get addToClaudeDesktopConfig => 'Lisää claude_desktop_config.json-tiedostoon';
-
-  @override
   String get connectAiAssistantsToData => 'Yhdistä AI-avustajat tietoihisi';
-
-  @override
-  String get useYourMcpApiKey => 'Käytä MCP API -avaintasi';
 
   @override
   String get realTimeTranscript => 'Reaaliaikainen litterointi';
@@ -2495,12 +2486,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get detailedDiagnosticMessages => 'Yksityiskohtaiset diagnostiikkaviestit';
-
-  @override
-  String get autoCreateSpeakers => 'Luo puhujat automaattisesti';
-
-  @override
-  String get autoCreateWhenNameDetected => 'Luo automaattisesti kun nimi havaitaan';
 
   @override
   String get followUpQuestions => 'Jatkokysymykset';
@@ -11163,11 +11148,25 @@ class AppLocalizationsFi extends AppLocalizations {
       'Kun nimeät jonkun, Omi tallentaa lyhyen ääninäytteen tunnistaakseen hänet ensi kerralla';
 
   @override
-  String get transcriptionUnavailableRecordingContinues =>
-      'Transkriptiot eivät ole käytettävissä, tallennus jatkuu laitteella ja käsitellään myöhemmin';
+  String get leaveBlank => 'Jätä tyhjäksi';
 
   @override
-  String get transcriptionUnavailableSavingOnDevice => 'Transkriptio ei käytettävissä · tallennetaan laitteelle';
+  String get mcpOAuthSetup =>
+      'Lisää claude.ai-palvelussa mukautettu liitin ja liitä palvelimen URL-osoite. Jos Claude pyytää edistynyttä OAuth Client ID:tä, käytä alla olevaa arvoa ja jätä salaisuus tyhjäksi — älä koskaan käytä MCP API -avaintasi OAuth-salaisuuksena.';
+
+  @override
+  String get claudeCode => 'Claude Code';
+
+  @override
+  String get addToClaudeCodeConfig => 'Lisää ~/.claude.json-tiedostoon';
+
+  @override
+  String get claudeDesktopConnectorSetup =>
+      'Lisää Claude Desktop → Settings → Connectors-palvelussa mukautettu liitin ja liitä palvelimen URL-osoite. Jos Claude pyytää edistynyttä OAuth Client ID:tä, käytä alla olevaa arvoa ja jätä salaisuus tyhjäksi — älä koskaan käytä MCP API -avaintasi OAuth-salaisuuksena.';
+
+  @override
+  String get transcriptionUnavailableRecordingContinues =>
+      'Transkriptiot eivät ole käytettävissä, tallennus jatkuu laitteella ja käsitellään myöhemmin';
 
   @override
   String transcriptionsPendingFraction(int pending, int total) {
@@ -11225,4 +11224,131 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get openCall => 'Avaa puhelu';
+
+  @override
+  String get captureRecoveryBanner => 'Riipuksen ääni ei tule perille sovellukseen — korjaa napauttamalla';
+
+  @override
+  String get phoneRecordingBlockedByPendantBatch =>
+      'Lopeta Transcribe Later riipuksessa ennen kuin nauhoitat puhelimella.';
+
+  @override
+  String get captureNotTranscribing => 'Ei litterointia';
+
+  @override
+  String get captureAudioSavedTranscribesLater => 'Ääni tallennettu, litteroidaan myöhemmin';
+
+  @override
+  String get captureStillRecording => 'Tallennus jatkuu';
+
+  @override
+  String get captureMicInUseElsewhere => 'Toinen sovellus käyttää mikrofonia';
+
+  @override
+  String get captureMicInterruptedDetail =>
+      'Puhelu tai toinen sovellus otti mikrofonin, joten Omi ei kuule juuri nyt. Omi jatkaa itsestään, kun mikrofoni vapautuu. Kaikki tätä ennen tallennettu on tallessa.';
+
+  @override
+  String get captureCustomSttUnreachableDetail =>
+      'Omaa puheentunnistuspalveluasi ei tavoiteta. Omi säilyttää äänen tässä puhelimessa ja lähettää sen, kun palvelu palaa. Mitään ei menetetä.';
+
+  @override
+  String get captureStarting => 'Käynnistetään…';
+
+  @override
+  String get capturePhoneStorageFull => 'Puhelimen tallennustila täynnä';
+
+  @override
+  String get captureStorageAlmostFull => 'Tallennustila melkein täynnä';
+
+  @override
+  String get capturePendantDisconnectedDetail =>
+      'Riipus menetti yhteyden tähän puhelimeen. Omi yhdistää itsestään uudelleen, kun riipus on päällä ja lähellä. Kaikki tätä ennen tallennettu on tallessa.';
+
+  @override
+  String participantsSummaryUncounted(String name) {
+    return '$name ja muut';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyTitle => 'Kuuntele Omin vastaukset';
+
+  @override
+  String get deviceOnboardingVoiceReplySample => 'Selvä. Seuraava kokouksesi alkaa kahdenkymmenen minuutin kuluttua.';
+
+  @override
+  String get deviceOnboardingAllSetTitle => 'Kaikki on valmista';
+
+  @override
+  String get deviceOnboardingAllSetSubtitle => 'Tarkista tai muuta riviä napauttamalla sitä.';
+
+  @override
+  String get deviceOnboardingAllSetSinglePressBadge => '1×';
+
+  @override
+  String get deviceOnboardingAllSetDoublePressBadge => '2×';
+
+  @override
+  String get deviceOnboardingVoiceReplySubtitle => 'Kun kysyt painikkeella, Omi voi lukea vastauksensa ääneen.';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewIdle => 'Kuuntele viimeinen vastauksesi';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewPlaying => 'Toistetaan viimeistä vastaustasi...';
+
+  @override
+  String deviceOnboardingVoiceReplyPreviewThroughDevice(String device) {
+    return '$device kautta';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker => 'Puhelimen kaiuttimen kautta';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughCurrentOutput => 'Nykyisen äänilähdön kautta';
+
+  @override
+  String get deviceOnboardingVoiceReplyOffDescription => 'Vastaukset pysyvät näytöllä. Mitään ei puhuta.';
+
+  @override
+  String get deviceOnboardingVoiceReplyHeadphonesDescription =>
+      'Yksityinen. Puhuu vain numeroiden AirPods, Bluetooth tai langallisten kuulokkeiden kautta.';
+
+  @override
+  String get deviceOnboardingVoiceReplyAlwaysDescription =>
+      'Käyttää puhelimen kaiutinta, kun kuulokkeita ei ole kytketty.';
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusOff => 'Omi pysyy hiljaa. Vastaukset näkyvät edelleen sovelluksessa.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusHeadphonesConnected(String device) {
+    return '$device yhdistetty. Omi puhuu täällä.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusHeadphonesDisconnected =>
+      'Kuulokkeita ei ole kytketty. Omi pysyy äänettömänä, kunnes yhdistät osan.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusAlwaysHeadphones(String device) {
+    return 'Toistaa numeron $device kautta.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusAlwaysSpeaker => 'Toistaa ääneen puhelimen kaiuttimesta.';
+
+  @override
+  String deviceOnboardingVoiceReplySettingsHint(String settings, String voiceResponse) {
+    return 'Voit muuttaa tätä milloin tahansa numerossa $settings › $voiceResponse';
+  }
+
+  @override
+  String deviceOnboardingAllSetReplayHint(String settings, String deviceSettings, String deviceTutorial) {
+    return 'Toista tämä kiertue milloin tahansa numerossa $settings › $deviceSettings › $deviceTutorial';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyGenericHeadphones => 'Kuulokkeet';
 }

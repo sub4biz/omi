@@ -935,9 +935,6 @@ class AppLocalizationsUr extends AppLocalizations {
   String get claudeDesktop => 'Claude ڈیسک ٹاپ';
 
   @override
-  String get addToClaudeConfig => 'claude_desktop_config.json میں شامل کریں';
-
-  @override
   String get copyConfig => 'ترتیب کاپی کریں';
 
   @override
@@ -2482,13 +2479,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get clearAllNodesAndConnections => 'تمام نوڈز اور کنکشنز کو صاف کریں';
 
   @override
-  String get addToClaudeDesktopConfig => 'claude_desktop_config.json میں شامل کریں';
-
-  @override
   String get connectAiAssistantsToData => 'AI معاونین کو اپنے ڈیٹا سے منسلک کریں';
-
-  @override
-  String get useYourMcpApiKey => 'اپنی MCP API کلید استعمال کریں';
 
   @override
   String get realTimeTranscript => 'حقیقی وقت میں ٹرانسکرپٹ';
@@ -2501,12 +2492,6 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get detailedDiagnosticMessages => 'تفصیلی تشخیصی پیغامات';
-
-  @override
-  String get autoCreateSpeakers => 'خود کار طور پر بولنے والے بنائیں';
-
-  @override
-  String get autoCreateWhenNameDetected => 'جب نام پایا جائے تو خود کار طور پر بنائیں';
 
   @override
   String get followUpQuestions => 'فالو اپ سوالات';
@@ -11170,11 +11155,25 @@ class AppLocalizationsUr extends AppLocalizations {
       'جب آپ کسی کا نام دیتے ہیں تو Omi اگلی بار پہچاننے کے لیے آواز کا ایک مختصر نمونہ رکھتا ہے';
 
   @override
-  String get transcriptionUnavailableRecordingContinues =>
-      'ٹرانسکرپشن دستیاب نہیں، ریکارڈنگ ڈیوائس پر جاری ہے اور بعد میں پروسیس ہوگی';
+  String get leaveBlank => 'خالی چھوڑیں';
 
   @override
-  String get transcriptionUnavailableSavingOnDevice => 'ٹرانسکرپشن دستیاب نہیں · ڈیوائس پر محفوظ ہو رہی ہے';
+  String get mcpOAuthSetup =>
+      'claude.ai پر ایک کسٹم کنیکٹر شامل کریں اور سرور URL پیسٹ کریں۔ اگر Claude ایک ایڈوانسڈ OAuth Client ID مانگے تو نیچے دی گئی قدر استعمال کریں اور سیکریٹ خالی چھوڑیں — اپنی MCP API کلید کو کبھی بھی OAuth سیکریٹ کے طور پر استعمال نہ کریں۔';
+
+  @override
+  String get claudeCode => 'Claude Code';
+
+  @override
+  String get addToClaudeCodeConfig => '~/.claude.json میں شامل کریں';
+
+  @override
+  String get claudeDesktopConnectorSetup =>
+      'Claude Desktop → Settings → Connectors پر ایک کسٹم کنیکٹر شامل کریں اور سرور URL پیسٹ کریں۔ اگر Claude ایک ایڈوانسڈ OAuth Client ID مانگے تو نیچے دی گئی قدر استعمال کریں اور سیکریٹ خالی چھوڑیں — اپنی MCP API کلید کو کبھی بھی OAuth سیکریٹ کے طور پر استعمال نہ کریں۔';
+
+  @override
+  String get transcriptionUnavailableRecordingContinues =>
+      'ٹرانسکرپشن دستیاب نہیں، ریکارڈنگ ڈیوائس پر جاری ہے اور بعد میں پروسیس ہوگی';
 
   @override
   String transcriptionsPendingFraction(int pending, int total) {
@@ -11232,4 +11231,132 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get openCall => 'کال کھولیں';
+
+  @override
+  String get captureRecoveryBanner => 'پینڈنٹ کی آواز ایپ تک نہیں پہنچ رہی — درست کرنے کے لیے ٹیپ کریں';
+
+  @override
+  String get phoneRecordingBlockedByPendantBatch =>
+      'فون سے ریکارڈ کرنے سے پہلے اپنے لاکٹ پر Transcribe Later بند کریں۔';
+
+  @override
+  String get captureNotTranscribing => 'ٹرانسکرپشن نہیں ہو رہی';
+
+  @override
+  String get captureAudioSavedTranscribesLater => 'آڈیو محفوظ، بعد میں ٹرانسکرائب ہوگی';
+
+  @override
+  String get captureStillRecording => 'ریکارڈنگ جاری ہے';
+
+  @override
+  String get captureMicInUseElsewhere => 'مائیک کسی اور ایپ کے استعمال میں ہے';
+
+  @override
+  String get captureMicInterruptedDetail =>
+      'کسی کال یا دوسری ایپ نے مائیکروفون لے لیا ہے، اس لیے Omi ابھی سن نہیں سکتا۔ مائیکروفون خالی ہوتے ہی Omi خود دوبارہ شروع ہو جائے گا۔ اس سے پہلے ریکارڈ ہونے والی ہر چیز محفوظ ہے۔';
+
+  @override
+  String get captureCustomSttUnreachableDetail =>
+      'آپ کی کسٹم اسپیچ ٹو ٹیکسٹ سروس تک رسائی نہیں ہو رہی۔ Omi آڈیو اسی فون پر رکھتا ہے اور سروس واپس آنے پر بھیج دے گا۔ کچھ ضائع نہیں ہوگا۔';
+
+  @override
+  String get captureStarting => 'شروع ہو رہا ہے…';
+
+  @override
+  String get capturePhoneStorageFull => 'فون اسٹوریج بھر گئی';
+
+  @override
+  String get captureStorageAlmostFull => 'اسٹوریج تقریباً بھر گئی';
+
+  @override
+  String get capturePendantDisconnectedDetail =>
+      'آپ کے پینڈنٹ کا اس فون سے رابطہ ٹوٹ گیا۔ پینڈنٹ آن اور قریب ہونے پر Omi خود دوبارہ جڑ جائے گا۔ اس سے پہلے ریکارڈ ہونے والی ہر چیز محفوظ ہے۔';
+
+  @override
+  String participantsSummaryUncounted(String name) {
+    return '$name اور دیگر';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyTitle => 'Omi کے جوابات سنیں';
+
+  @override
+  String get deviceOnboardingVoiceReplySample => 'سمجھ گیا۔ آپ کی اگلی میٹنگ بیس منٹ میں شروع ہوگی۔';
+
+  @override
+  String get deviceOnboardingAllSetTitle => 'سب تیار ہے';
+
+  @override
+  String get deviceOnboardingAllSetSubtitle => 'جائزہ لینے یا تبدیل کرنے کے لیے کسی قطار پر ٹیپ کریں۔';
+
+  @override
+  String get deviceOnboardingAllSetSinglePressBadge => '1×';
+
+  @override
+  String get deviceOnboardingAllSetDoublePressBadge => '2×';
+
+  @override
+  String get deviceOnboardingVoiceReplySubtitle =>
+      'جب آپ بٹن سے پوچھتے ہیں تو Omi اس کا جواب بلند آواز میں پڑھ سکتا ہے۔';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewIdle => 'اپنا آخری جواب سنیں۔';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewPlaying => 'آپ کا آخری جواب چل رہا ہے...';
+
+  @override
+  String deviceOnboardingVoiceReplyPreviewThroughDevice(String device) {
+    return '$device کے ذریعے';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker => 'فون اسپیکر کے ذریعے';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughCurrentOutput => 'موجودہ آڈیو آؤٹ پٹ کے ذریعے';
+
+  @override
+  String get deviceOnboardingVoiceReplyOffDescription => 'جوابات اسکرین پر رہتے ہیں۔ کچھ بولا نہیں جاتا۔';
+
+  @override
+  String get deviceOnboardingVoiceReplyHeadphonesDescription =>
+      'نجی۔ صرف AirPods، Bluetooth یا وائرڈ ہیڈ فون کے ذریعے بات کرتا ہے۔';
+
+  @override
+  String get deviceOnboardingVoiceReplyAlwaysDescription =>
+      'جب کوئی ہیڈ فون منسلک نہ ہو تو فون اسپیکر استعمال کرتا ہے۔';
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusOff => 'Omi خاموش رہیں گے۔ جوابات اب بھی ایپ میں نظر آتے ہیں۔';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusHeadphonesConnected(String device) {
+    return '$device منسلک ہے۔ Omi یہاں بات کریں گے۔';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusHeadphonesDisconnected =>
+      'کوئی ہیڈ فون منسلک نہیں ہے۔ Omi اس وقت تک خاموش رہتا ہے جب تک آپ کچھ کو جوڑ نہیں لیتے۔';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusAlwaysHeadphones(String device) {
+    return '$device کے ذریعے کھیلتا ہے۔';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusAlwaysSpeaker => 'فون اسپیکر کے ذریعے اونچی آواز میں چلاتا ہے۔';
+
+  @override
+  String deviceOnboardingVoiceReplySettingsHint(String settings, String voiceResponse) {
+    return 'آپ اسے کسی بھی وقت $settings › $voiceResponse میں تبدیل کر سکتے ہیں۔';
+  }
+
+  @override
+  String deviceOnboardingAllSetReplayHint(String settings, String deviceSettings, String deviceTutorial) {
+    return 'اس ٹور کو کسی بھی وقت $settings › $deviceSettings › $deviceTutorial میں دوبارہ چلائیں۔';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyGenericHeadphones => 'ہیڈ فون';
 }

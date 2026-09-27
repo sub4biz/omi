@@ -936,9 +936,6 @@ class AppLocalizationsSv extends AppLocalizations {
   String get claudeDesktop => 'Claude Desktop';
 
   @override
-  String get addToClaudeConfig => 'Lägg till i claude_desktop_config.json';
-
-  @override
   String get copyConfig => 'Kopiera konfiguration';
 
   @override
@@ -2479,13 +2476,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get clearAllNodesAndConnections => 'Rensa alla noder och anslutningar';
 
   @override
-  String get addToClaudeDesktopConfig => 'Lägg till i claude_desktop_config.json';
-
-  @override
   String get connectAiAssistantsToData => 'Anslut AI-assistenter till dina data';
-
-  @override
-  String get useYourMcpApiKey => 'Använd din MCP API-nyckel';
 
   @override
   String get realTimeTranscript => 'Realtidstranskription';
@@ -2498,12 +2489,6 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get detailedDiagnosticMessages => 'Detaljerade diagnostiska meddelanden';
-
-  @override
-  String get autoCreateSpeakers => 'Skapa talare automatiskt';
-
-  @override
-  String get autoCreateWhenNameDetected => 'Skapa automatiskt när namn upptäcks';
 
   @override
   String get followUpQuestions => 'Uppföljningsfrågor';
@@ -11169,11 +11154,25 @@ class AppLocalizationsSv extends AppLocalizations {
       'När du namnger någon sparar Omi ett kort röstprov så att den känner igen personen nästa gång';
 
   @override
-  String get transcriptionUnavailableRecordingContinues =>
-      'Transkriptioner är inte tillgängliga, inspelningen fortsätter på enheten och bearbetas senare';
+  String get leaveBlank => 'Lämna tomt';
 
   @override
-  String get transcriptionUnavailableSavingOnDevice => 'Transkription inte tillgänglig · sparas på enheten';
+  String get mcpOAuthSetup =>
+      'På claude.ai lägger du till en anpassad connector och klistrar in server-URL:en. Om Claude ber om ett avancerat OAuth Client ID använder du värdet nedan och lämnar hemligheten tom — använd aldrig din MCP API-nyckel som OAuth-hemlighet.';
+
+  @override
+  String get claudeCode => 'Claude Code';
+
+  @override
+  String get addToClaudeCodeConfig => 'Lägg till i ~/.claude.json';
+
+  @override
+  String get claudeDesktopConnectorSetup =>
+      'På Claude Desktop → Settings → Connectors lägger du till en anpassad connector och klistrar in server-URL:en. Om Claude ber om ett avancerat OAuth Client ID använder du värdet nedan och lämnar hemligheten tom — använd aldrig din MCP API-nyckel som OAuth-hemlighet.';
+
+  @override
+  String get transcriptionUnavailableRecordingContinues =>
+      'Transkriptioner är inte tillgängliga, inspelningen fortsätter på enheten och bearbetas senare';
 
   @override
   String transcriptionsPendingFraction(int pending, int total) {
@@ -11231,4 +11230,131 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get openCall => 'Öppna samtal';
+
+  @override
+  String get captureRecoveryBanner => 'Ljudet från hänget når inte appen — tryck för att reparera';
+
+  @override
+  String get phoneRecordingBlockedByPendantBatch =>
+      'Stoppa Transcribe Later på ditt hängsmycke innan du spelar in med telefonen.';
+
+  @override
+  String get captureNotTranscribing => 'Transkriberar inte';
+
+  @override
+  String get captureAudioSavedTranscribesLater => 'Ljud sparat, transkriberas senare';
+
+  @override
+  String get captureStillRecording => 'Spelar fortfarande in';
+
+  @override
+  String get captureMicInUseElsewhere => 'Mikrofonen används av en annan app';
+
+  @override
+  String get captureMicInterruptedDetail =>
+      'Ett samtal eller en annan app tog mikrofonen, så Omi kan inte höra just nu. Omi fortsätter av sig själv när mikrofonen är ledig. Allt som spelats in innan är säkert.';
+
+  @override
+  String get captureCustomSttUnreachableDetail =>
+      'Din egen tal-till-text-tjänst går inte att nå. Omi behåller ljudet på den här telefonen och skickar det när tjänsten är tillbaka. Inget går förlorat.';
+
+  @override
+  String get captureStarting => 'Startar…';
+
+  @override
+  String get capturePhoneStorageFull => 'Telefonens lagring är full';
+
+  @override
+  String get captureStorageAlmostFull => 'Lagringen är nästan full';
+
+  @override
+  String get capturePendantDisconnectedDetail =>
+      'Hängsmycket tappade anslutningen till den här telefonen. Omi ansluter igen av sig själv när hängsmycket är på och i närheten. Allt som spelats in innan är säkert.';
+
+  @override
+  String participantsSummaryUncounted(String name) {
+    return '$name och andra';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyTitle => 'Lyssna på Omis svar';
+
+  @override
+  String get deviceOnboardingVoiceReplySample => 'Uppfattat. Ditt nästa möte börjar om tjugo minuter.';
+
+  @override
+  String get deviceOnboardingAllSetTitle => 'Allt är klart';
+
+  @override
+  String get deviceOnboardingAllSetSubtitle => 'Tryck på en rad för att granska eller ändra den.';
+
+  @override
+  String get deviceOnboardingAllSetSinglePressBadge => '1×';
+
+  @override
+  String get deviceOnboardingAllSetDoublePressBadge => '2×';
+
+  @override
+  String get deviceOnboardingVoiceReplySubtitle => 'När du frågar med knappen kan Omi läsa sitt svar högt.';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewIdle => 'Hör ditt sista svar';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewPlaying => 'Spelar upp ditt senaste svar...';
+
+  @override
+  String deviceOnboardingVoiceReplyPreviewThroughDevice(String device) {
+    return 'Via $device';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughPhoneSpeaker => 'Genom telefonens högtalare';
+
+  @override
+  String get deviceOnboardingVoiceReplyPreviewThroughCurrentOutput => 'Genom den aktuella ljudutgången';
+
+  @override
+  String get deviceOnboardingVoiceReplyOffDescription => 'Svaren stannar på skärmen. Ingenting talas.';
+
+  @override
+  String get deviceOnboardingVoiceReplyHeadphonesDescription =>
+      'Privat. Talar endast via AirPods, Bluetooth eller trådbundna hörlurar.';
+
+  @override
+  String get deviceOnboardingVoiceReplyAlwaysDescription =>
+      'Använder telefonens högtalare när inga hörlurar är anslutna.';
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusOff => 'Omi kommer att vara tyst. Svaren visas fortfarande i appen.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusHeadphonesConnected(String device) {
+    return '$device ansluten. Omi kommer att tala här.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusHeadphonesDisconnected =>
+      'Inga hörlurar anslutna. Omi förblir tyst tills du ansluter några.';
+
+  @override
+  String deviceOnboardingVoiceReplyStatusAlwaysHeadphones(String device) {
+    return 'Spelas upp till $device.';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyStatusAlwaysSpeaker => 'Spelas högt genom telefonens högtalare.';
+
+  @override
+  String deviceOnboardingVoiceReplySettingsHint(String settings, String voiceResponse) {
+    return 'Du kan ändra detta när som helst i $settings › $voiceResponse';
+  }
+
+  @override
+  String deviceOnboardingAllSetReplayHint(String settings, String deviceSettings, String deviceTutorial) {
+    return 'Spela om den här turnén när som helst i $settings › $deviceSettings › $deviceTutorial';
+  }
+
+  @override
+  String get deviceOnboardingVoiceReplyGenericHeadphones => 'Hörlurar';
 }
